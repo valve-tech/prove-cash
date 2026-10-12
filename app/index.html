@@ -1,0 +1,89 @@
+<!doctype html>
+<!--
+  `lang` is rewritten per locale by scripts/prerender.ts, and again at run time by lib/i18n when
+  the reader changes language. The whole tag is the marker, so keep it on one line.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#05070a" />
+
+    <!--
+      These tags describe the landing page, because that is what a stranger and a link preview
+      hit. Every claim here is on the list in
+      docs/specs/2026-08-12-surfaces-and-claims.md. Nothing else goes in.
+
+      Everything between the two `seo` markers is GENERATED, by `head()` in src/lib/seo.ts, and
+      the build writes one copy of it per language. What stands here is the English page — the
+      copy Vite serves in development, and the one a reader gets at `/`. Do not hand-edit it:
+      `seo.test.ts` compares this block to `head('en')` character for character, so an edit here
+      is a failing test rather than a page that quietly disagrees with the other thirty-four.
+
+      The `hreflang` rows are identical in every copy. That is what makes a crawler read the
+      thirty-five as one page in thirty-five languages rather than as thirty-five thin ones.
+    -->
+    <!--seo-->
+    <title>prove.cash — sign a swap offer, send no transaction</title>
+    <meta name="description" content="Signing an offer costs no gas and no transaction. Anyone can execute it, and you receive exactly the rate you signed. Swap intents on PulseChain." />
+    <link rel="canonical" href="https://prove.cash/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="prove.cash" />
+    <meta property="og:url" content="https://prove.cash/" />
+    <meta property="og:title" content="prove.cash — sign a swap offer, send no transaction" />
+    <meta property="og:description" content="Signing an offer costs no gas and no transaction. Anyone can execute it, and you receive exactly the rate you signed. Swap intents on PulseChain." />
+    <meta property="og:image" content="https://prove.cash/hero.png" />
+    <meta property="og:image:width" content="343" />
+    <meta property="og:image:height" content="361" />
+    <meta property="og:image:alt" content="Two stacked slabs: the signed offer above, the settled trade below." />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="prove.cash — sign a swap offer, send no transaction" />
+    <meta name="twitter:description" content="Signing an offer costs no gas and no transaction. Anyone can execute it, and you receive exactly the rate you signed. Swap intents on PulseChain." />
+    <meta name="twitter:image" content="https://prove.cash/hero.png" />
+
+    <link rel="alternate" hreflang="x-default" href="https://prove.cash/" />
+    <link rel="alternate" hreflang="en" href="https://prove.cash/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://prove.cash/zh-hans/" />
+    <link rel="alternate" hreflang="zh-Hant" href="https://prove.cash/zh-hant/" />
+    <link rel="alternate" hreflang="ja" href="https://prove.cash/ja/" />
+    <link rel="alternate" hreflang="ko" href="https://prove.cash/ko/" />
+    <link rel="alternate" hreflang="fr" href="https://prove.cash/fr/" />
+    <link rel="alternate" hreflang="de" href="https://prove.cash/de/" />
+    <link rel="alternate" hreflang="es" href="https://prove.cash/es/" />
+    <link rel="alternate" hreflang="es-419" href="https://prove.cash/es-419/" />
+    <link rel="alternate" hreflang="it" href="https://prove.cash/it/" />
+    <link rel="alternate" hreflang="pt-BR" href="https://prove.cash/pt-br/" />
+    <link rel="alternate" hreflang="pt-PT" href="https://prove.cash/pt-pt/" />
+    <link rel="alternate" hreflang="nl" href="https://prove.cash/nl/" />
+    <link rel="alternate" hreflang="sv" href="https://prove.cash/sv/" />
+    <link rel="alternate" hreflang="da" href="https://prove.cash/da/" />
+    <link rel="alternate" hreflang="nb" href="https://prove.cash/nb/" />
+    <link rel="alternate" hreflang="fi" href="https://prove.cash/fi/" />
+    <link rel="alternate" hreflang="ru" href="https://prove.cash/ru/" />
+    <link rel="alternate" hreflang="pl" href="https://prove.cash/pl/" />
+    <link rel="alternate" hreflang="tr" href="https://prove.cash/tr/" />
+    <link rel="alternate" hreflang="ar" href="https://prove.cash/ar/" />
+    <link rel="alternate" hreflang="he" href="https://prove.cash/he/" />
+    <link rel="alternate" hreflang="th" href="https://prove.cash/th/" />
+    <link rel="alternate" hreflang="vi" href="https://prove.cash/vi/" />
+    <link rel="alternate" hreflang="id" href="https://prove.cash/id/" />
+    <link rel="alternate" hreflang="ms" href="https://prove.cash/ms/" />
+    <link rel="alternate" hreflang="hi" href="https://prove.cash/hi/" />
+    <link rel="alternate" hreflang="el" href="https://prove.cash/el/" />
+    <link rel="alternate" hreflang="cs" href="https://prove.cash/cs/" />
+    <link rel="alternate" hreflang="sk" href="https://prove.cash/sk/" />
+    <link rel="alternate" hreflang="hu" href="https://prove.cash/hu/" />
+    <link rel="alternate" hreflang="ro" href="https://prove.cash/ro/" />
+    <link rel="alternate" hreflang="uk" href="https://prove.cash/uk/" />
+    <link rel="alternate" hreflang="hr" href="https://prove.cash/hr/" />
+    <link rel="alternate" hreflang="ca" href="https://prove.cash/ca/" />
+    <!--/seo-->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

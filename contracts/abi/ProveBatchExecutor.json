@@ -1,0 +1,781 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "_settlement",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "ANY_LEG",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "MAX_DISPOSALS",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "NO_PATCH",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "WHEN_ABSENT",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "proveBatchCallback",
+    "inputs": [
+      {
+        "name": "owed",
+        "type": "tuple[]",
+        "internalType": "struct IProveBatchCallback.Payment[]",
+        "components": [
+          {
+            "name": "token",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "to",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "fee",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "leg",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeInDue",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeProceeds",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "data",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "relayer",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "sellSurplus",
+    "inputs": [
+      {
+        "name": "s",
+        "type": "tuple",
+        "internalType": "struct ProveBatchExecutor.Swap",
+        "components": [
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "spender",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "target",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "data",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "extra",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "leg",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "amountOffset",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutOffset",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutPerIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "have",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "callSink",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "settleRing",
+    "inputs": [
+      {
+        "name": "reqs",
+        "type": "tuple[]",
+        "internalType": "struct IProveSettlementBatch.FillRequest[]",
+        "components": [
+          {
+            "name": "intent",
+            "type": "tuple",
+            "internalType": "struct IProveSettlementFill.Intent",
+            "components": [
+              {
+                "name": "maker",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "tokenIn",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "tokenOut",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "amountIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutStart",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutEnd",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "startTime",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "endTime",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "executor",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "feeConfig",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeRate",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "minFill",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "authNonce",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "flags",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "nonce",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "curve",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeRateIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "feeRateProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              }
+            ]
+          },
+          {
+            "name": "signature",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "take",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "arming",
+            "type": "bytes",
+            "internalType": "bytes"
+          }
+        ]
+      },
+      {
+        "name": "skipInvalid",
+        "type": "bool",
+        "internalType": "bool"
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "route",
+        "type": "tuple",
+        "internalType": "struct ProveBatchExecutor.Route",
+        "components": [
+          {
+            "name": "legs",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "swaps",
+            "type": "tuple[]",
+            "internalType": "struct ProveBatchExecutor.Swap[]",
+            "components": [
+              {
+                "name": "tokenIn",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "amountIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "tokenOut",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "spender",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "target",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "data",
+                "type": "bytes",
+                "internalType": "bytes"
+              },
+              {
+                "name": "extra",
+                "type": "address[]",
+                "internalType": "address[]"
+              },
+              {
+                "name": "leg",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "amountOffset",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutOffset",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutPerIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "disposal",
+            "type": "tuple[]",
+            "internalType": "struct ProveBatchExecutor.Swap[]",
+            "components": [
+              {
+                "name": "tokenIn",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "amountIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "tokenOut",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "spender",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "target",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "data",
+                "type": "bytes",
+                "internalType": "bytes"
+              },
+              {
+                "name": "extra",
+                "type": "address[]",
+                "internalType": "address[]"
+              },
+              {
+                "name": "leg",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "amountOffset",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutOffset",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutPerIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "sweep",
+            "type": "address[]",
+            "internalType": "address[]"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "count",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "settlement",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IProveSettlementBatch"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "sinkFor",
+    "inputs": [
+      {
+        "name": "caller",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "sinkTemplate",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract ProveCallSink"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "SurplusUnsold",
+    "inputs": [
+      {
+        "name": "tokenIn",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "tokenOut",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "BadSettlement",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "BalanceWentDown",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "FailedDeployment",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ForbiddenTarget",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InsufficientBalance",
+    "inputs": [
+      {
+        "name": "balance",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "needed",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "LegCountMismatch",
+    "inputs": [
+      {
+        "name": "planned",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "owed",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "LegOutOfRange",
+    "inputs": [
+      {
+        "name": "leg",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "legs",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "LegsExceedBatch",
+    "inputs": [
+      {
+        "name": "planned",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "sent",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "NotSettlement",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NothingToSell",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "OversizedDisposal",
+    "inputs": [
+      {
+        "name": "want",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "have",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "OwedTokenNotSwept",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "PatchOnTheBuySide",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "PatchOutOfRange",
+    "inputs": [
+      {
+        "name": "offset",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "length",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "PatchWithoutBound",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ProceedsNotHere",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "held",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "owed",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "Reentered",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "SafeERC20FailedOperation",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "TooManyDisposals",
+    "inputs": [
+      {
+        "name": "count",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  }
+]

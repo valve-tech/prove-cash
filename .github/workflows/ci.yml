@@ -1,0 +1,359 @@
+name: ci
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      # `fetch-depth: 0` because `check-gas-figures.py` subtracts the gas table's history from
+      # its present to find figures copied out of it and left behind. The default depth of 1
+      # gives it one commit, which computes to "nothing was ever retired" — and then every
+      # excuse it holds reports stale at once. It refuses a shallow clone now rather than
+      # answering from one, and this is what stops it having to.
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      # Pinned, because the gas ceilings are measurements and foundry moves them. Unpinned, this
+      # took whatever was newest that day: on 2026-09-16 it took v1.8.3 and read a carried fallback
+      # at 21,465 against a 20,000 ceiling, while v1.8.0 reads 17,506 for the same bytecode. Both
+      # figures are `gasleft()` deltas, which foundry's own accounting shifts between releases, so
+      # an unpinned toolchain turns a tool upgrade into a red gate nobody can explain. Move this
+      # only with every ceiling re-measured under the new version.
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.0
+
+      # Formatting was unchecked until 2026-09-09 and 43 files had drifted. Nobody ran the
+      # formatter because a run of it moves most lines in `contracts/`, which rots the line
+      # citations four documents make — 87 of 500 in the sweep that fixed this. So the gate goes
+      # in beside the tool that repairs that: `contracts/tools/reanchor-citations.py`.
+      - name: Formatting
+        run: forge fmt --check
+        working-directory: contracts
+
+      # The fork suites, which had never run in CI: `secrets.PULSECHAIN_RPC` was expanded here
+      # and never set, so the skip fired on every green build. The URL holds no key, so it goes in
+      # the command. The key goes in an `X-API-Key` header: a key in a URL path reaches access logs
+      # and every upstream hop. `[profile.fork]` sends the public demo key. `PROVE_CI_RPC_KEY`,
+      # when set, replaces it. Unset, the expression still gives `vk_demo`, never an empty value:
+      # an empty `FOUNDRY_ETH_RPC_HEADERS` deletes the profile header and every call gets a 401.
+      # `Live369.t.sol` stays out: its header says it fails until #52 redeploys mainnet.
+      #
+      # `-j 1` and the compute-unit cap are pacing, and they are measured rather than guessed.
+      # Forge runs the four fork suites in parallel, and each one holds its own provider with its
+      # own rate budget. The gateway sees the sum and answers 429.
+      #
+      # Counted through a proxy that forwards every call: a default run makes 623 requests and
+      # 219 come back 429. That is 35 percent, and `eth_getStorageAt` takes 150 of them. Forge
+      # retries a 429 without saying so, so the suite still passes green and the cost stays
+      # invisible — until one retry chain runs out and kills whichever test held it. That is the
+      # failure that landed in three different places in two days.
+      #
+      # Lowering the cap alone does not fix it, because the cap is per provider and four of them
+      # run at once: 149 of 547 requests still came back 429. One worker with the cap measures
+      # 582 requests and zero. The price is wall time, 54s to 161s.
+      #
+      # Both flags live in the command rather than in `env:`, because `tools/check-ci-parity.py`
+      # compares commands and ignores `env:`. A `FOUNDRY_THREADS` key dropped from one of the two
+      # copies would leave the parity gate green and the pacing gone.
+      - name: Fork tests, against real mainnet contracts
+        run: FOUNDRY_PROFILE=fork python3 tools/count-429.py --upstream https://one.valve.city/rpc/evm/369 --max-pct 10 -- forge test --match-path 'test/Fork*.t.sol' -vv -j 1 --compute-units-per-second 165
+        working-directory: contracts
+        env:
+          FOUNDRY_ETH_RPC_HEADERS: >-
+            ${{ format('["X-API-Key: {0}"]', secrets.PROVE_CI_RPC_KEY || 'vk_demo') }}
+
+      - name: Build
+        run: forge build --sizes
+        working-directory: contracts
+
+      # The fork tests skip themselves without PULSECHAIN_RPC, so this stays
+      # offline unless the secret is set on the repository.
+      - name: Test
+        run: forge test -vv
+        working-directory: contracts
+        env:
+          PULSECHAIN_RPC: ${{ secrets.PULSECHAIN_RPC }}
+
+      # Runs the coverage report and fails on anything left uncovered. The one thing it
+      # forgives is a line inside an `assembly` block, because `forge coverage` counts no Yul
+      # statement anywhere in this codebase however many tests run it — and it computes that
+      # exemption from the source, so a gap in ordinary Solidity cannot hide behind it.
+      #
+      # `--ir-minimum` is not optional. Coverage turns the optimizer and via-IR off, these
+      # contracts need via-IR, and forge-std itself will not compile without it.
+      - name: Coverage is complete
+        run: python3 tools/coverage-gate.py
+        working-directory: contracts
+
+      # Taken before the Yul tool runs, compared after it. See the step below.
+      - name: Fingerprint the sources
+        run: python3 tools/src-fingerprint.py
+        working-directory: contracts
+
+      # The other half of that forgiveness — the proof that the suite runs the Yul the gate
+      # excuses — is `prove-yul-runs.py`, and it runs in the nightly soak.
+      #
+      # **Measured, on the run that put it here.** The contracts job took 36m12s and this step was
+      # 22m49s of it: 63% of every pull request, to re-prove a claim that changes only when
+      # somebody edits an `assembly` block. It has to be single-threaded to run at all — forge
+      # fans `solc` across every core and the parallel via-IR builds are what killed the local
+      # runner three times on a 16 GB machine — so it cannot be made faster here, only moved.
+      #
+      # What stays on this path: the coverage gate, which computes the Yul exemption from the
+      # source, so a gap in ordinary Solidity still cannot hide behind it. What moves: the proof
+      # that the excused assembly is exercised. A change that breaks that claim is caught the next
+      # morning rather than within the hour — the same trade `soak.yml` already makes for
+      # invariant depth, and now made on a number rather than an impression.
+      # `docs/FEE-MODEL.md` and `docs/AUDIT-SCOPE.md` both say the code is the authority and a
+      # line number is a checkable claim. This reads every citation in both, reads the line it
+      # names, and fails on the first one that no longer says what the document claims. Twice in
+      # two days a citation rotted silently before anyone built this — once by roughly 130 lines,
+      # once by all 21 in one file the day after it was re-anchored.
+      #
+      # `AUDIT-SCOPE.md` was expected to fail here for a while: it had been refreshed the day
+      # before two more contract commits landed, and its own tree-hash control reported that
+      # mismatch on purpose. #126 closed that. Both documents are clean now and this step is
+      # simply a gate again.
+      - name: Documentation citations point at what they claim
+        run: python3 tools/check-citations.py
+        working-directory: contracts
+
+      # Both documents pin the audited `contracts/src` tree by git object id, and both tell the
+      # reader what that buys: the hash names content rather than a moment, so it moves when the
+      # audited code moves and at no other time. Nothing read it. The pin went stale four times,
+      # and the fourth time `AUDIT-SCOPE.md` also disagreed with itself for five commits — its
+      # opening named `ee4bcd27` while its own section 3 table and the rest of the pack named
+      # `02589045`. Every gate stayed green through all of it, the citation gate included,
+      # because a citation that points at a real line can sit in a sentence that is false. A
+      # person found it by reading two documents side by side. This reads every pin site in both.
+      - name: The audit pack pins the tree that exists
+        run: python3 tools/check-tree-pin.py
+
+      # `tools/run-ci.sh` runs this whole workflow on a developer machine, and `.githooks/
+      # pre-push` refuses a push it has not covered. That only means anything while the two lists
+      # match, and a second copy of anything in this repository has gone stale at least once. So
+      # they are compared, and the checker stops on a step form it does not recognise rather than
+      # skipping it.
+      #
+      # The reason any of this exists: the coverage gate sat red on `master` for four days. Every
+      # gate worked. None had been asked, because CI triggers on push and 87 commits had never
+      # been pushed.
+      - name: The local runner runs what this workflow runs
+        run: python3 tools/check-ci-parity.py
+
+      # The tool breaks contracts on purpose, and it does that in a scratch worktree so this
+      # checkout never sees it. This costs nothing and proves that held: if a future change
+      # ever reaches back into `src/`, every step after it would be measuring a tree nobody
+      # wrote, and this is where that stops.
+      #
+      # It compares a fingerprint rather than running `git diff --exit-code src/`. The diff asks
+      # whether the tree matches the last commit, which is the same question here and a different
+      # one on a developer's machine: anybody with uncommitted contract work failed it every
+      # time, so `tools/run-ci.sh` could never go green during the work it guards.
+      - name: The sources are back as they were
+        run: python3 tools/src-fingerprint.py --compare
+        working-directory: contracts
+
+      - name: Gas
+        run: forge test --match-path test/Gas.t.sol -vv
+        working-directory: contracts
+
+      # The landing page prints these numbers, so the page is a claim about what a fill costs.
+      # `gen-gas.mjs` writes them from this very test; nothing checked that the written copy kept
+      # up. It did not — the table was generated once and `Gas.t.sol` changed five times after,
+      # so the page advertised 33,403 for a warm allowance fill against a measured 105,238, in
+      # thirty-five languages. The script needs node and forge and none of the app's packages,
+      # which is why it runs here rather than in the app job.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: The landing page's gas table matches the test
+        run: node app/scripts/gen-gas.mjs --check
+
+      # The landing page's table is generated and compared above. The DOZENS of copies of its
+      # numbers that live in comments and prose are not, and they go stale silently every time a
+      # contract changes — the page once advertised 33,403 gas for a warm allowance fill against
+      # a measured 105,238, in thirty-five languages, and on 2026-09-08 five figures in the
+      # solver's own comments were stale at once with the bot's break-even computed from them.
+      #
+      # This cannot check whether a number looks right: 2,100 for a cold SLOAD is correct and is
+      # not in the table, and guessing would be wrong about 92% of the figures here. It checks
+      # something exact instead — a figure equal to a value the table ONCE held and no longer
+      # holds was copied out of the table and left behind.
+      - name: No prose quotes a retired gas figure
+        run: python3 tools/check-gas-figures.py
+        working-directory: contracts
+
+      # `contracts/abi/` is the second copy of every ABI, and nothing in the repo reads it, so
+      # nothing else would notice it going stale. It already has once.
+      - name: ABI export is current
+        run: bash abi/export.sh --check
+        working-directory: contracts
+
+      # The Solidity suite rewrites the EIP-712 fixture the TypeScript tests assert against.
+      # If the struct changed and the committed fixture did not, the two implementations have
+      # drifted and every signature the app produces would be unspendable.
+      - name: Fixture is current
+        run: git diff --exit-code app/src/lib/__fixtures__/
+
+  sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: sdk/package-lock.json
+
+      # Pinned to the same version the contracts job takes, so both jobs compile the same bytecode.
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.0
+
+      # The ABI check reads what the compiler produced, so the contracts have to be built.
+      - name: Build contracts
+        run: forge build
+        working-directory: contracts
+
+      - name: Install
+        run: npm ci
+        working-directory: sdk
+
+      # `tsc` cannot catch this. `writeContract` goes through `as never` because the wallet client
+      # is loosely typed, and viem's inference degrades on an ABI this size — six stale function
+      # names once compiled cleanly and would have failed on every call. This compares the
+      # generated ABI and every call site against the compiler's own output.
+      - name: ABI matches the contracts
+        run: npm run check:abi
+        working-directory: sdk
+
+      - name: Lint
+        run: npm run lint
+        working-directory: sdk
+
+      - name: Typecheck
+        run: npm run typecheck
+        working-directory: sdk
+
+      - name: Build
+        run: npm run build
+        working-directory: sdk
+
+      # Reads contracts/test/Fixture.t.sol's output from app/src/lib/__fixtures__/, so the
+      # TypeScript codec stays pinned to the Solidity contract.
+      - name: Test
+        run: npm test
+        working-directory: sdk
+
+  app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            sdk/package-lock.json
+            app/package-lock.json
+
+      # Both sides resolve viem, and viem names typescript as an optional peer dependency.
+      # TypeScript folds the resolved compiler into viem's package identity, so one compiler
+      # on each side of the `file:../sdk` link makes one package into two type realms and
+      # nothing is assignable across it. Dependabot bumps one package at a time, so the two
+      # versions drift on their own — and when they do, the 12 errors from `tsc -b` name viem
+      # and `Client_Base` and never say the word typescript. This is what says it.
+      - name: The app and the SDK pin the same TypeScript
+        run: python3 tools/check-typescript-match.py
+
+      # The fee-sink admin CLI encodes FeeSink's constructor from the compiled artifact, and a
+      # test checks it. So the app job needs the contracts built, like the SDK job does.
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.0
+
+      - name: Build contracts
+        run: forge build
+        working-directory: contracts
+
+      # The app depends on ../sdk through a file: link, so the SDK has to be compiled
+      # before anything in the app can resolve it.
+      - name: Install the SDK
+        run: npm ci
+        working-directory: sdk
+
+      - name: Build the SDK
+        run: npm run build
+        working-directory: sdk
+
+      - name: Install
+        run: npm ci
+        working-directory: app
+
+      - name: Lint
+        run: npm run lint
+        working-directory: app
+
+      - name: Typecheck
+        run: npx tsc -b
+        working-directory: app
+
+      # The bots are not part of the app's project references, so they get their own pass.
+      # Without this a moved export breaks them and nothing notices until one is run.
+      - name: Typecheck the scripts
+        run: npx tsc -p scripts/tsconfig.json
+        working-directory: app
+
+      # The one incident this project had (2026-08-18) was a credential leaking into journald
+      # because an error was logged without `redact()`. The library exists in
+      # `app/scripts/rpc.ts` and is tested. Nothing enforced its use — RS.MI-02. This gate
+      # finds every `} catch` and `.catch` in `app/scripts/**/*.ts` and fails when one logs
+      # the caught error without passing it through `redact()` or `describe()`.
+      - name: Every logged error is redacted
+        run: python3 tools/check-redact.py
+
+      - name: Test
+        run: npm test
+        working-directory: app
+
+      # Two files keep a copy of an address the deploy already recorded, both on purpose:
+      # `app/deploy/*.service` (operator-side, not in this tree) so an operator names the contract their bot talks to, and
+      # `app/src/rfq/venue.ts` so a maker can put the venue in `Intent.executor` before there is
+      # a quote to read it out of. Nothing compared either copy with the record. A missing value
+      # is the loud half — twelve unspendable intents reached the mainnet board when a settlement
+      # line went missing. A wrong one is the quiet half: everything starts, connects, and talks
+      # to a contract the deploy replaced. The suite above already runs this, and it gets its own
+      # step so a failure names the thing that is wrong.
+      - name: The copied addresses match the deployment records
+        run: npm run check:addresses
+        working-directory: app
+
+      # `contracts/config/fee-configs.json` mirrors `FeeDefaults`. Undeployed, it is checked
+      # against itself (valid configs, rates within one WAD, unique ids); deployed, its history
+      # must equal the chain's `DefaultsSet` logs, and a chain it cannot ask is reported as
+      # skipped, never as passed. `contracts/test/FeeConfigsJson.t.sol` recomputes the hashes.
+      - name: The fee configs file is consistent
+        run: npm run check:fee-configs
+        working-directory: app
+
+      - name: Build
+        run: npm run build
+        working-directory: app

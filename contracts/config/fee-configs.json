@@ -1,0 +1,72 @@
+{
+  "_comment": "Fee configs per chain: the immutable stray config the settlement is constructed with, the FeeDefaults address once deployed, and the append-only history of the defaults published there. A CI MIRROR of FeeDefaults, not its authority: `contracts/test/FeeConfigsJson.t.sol` recomputes every hash, `app/scripts/check-fee-configs.ts` compares this file with the chain's DefaultsSet logs. Append only. Rates are fractions of 1e18 as decimal strings. `Deploy.s.sol` reads the stray config and the LAST history entry (the initial defaults it publishes). Spec: docs/specs/2026-10-03-fee-config-hash.md section 2.4.",
+  "_rates": "handover = P1 feeRateIn (tokenIn, gas cover), output = P2 feeRate (tokenOut, on top), proceeds = P3 feeRateProceeds (out of the maker's proceeds). Initial values per the owner's defaults: handover 0, output 0.5% (5e15), proceeds 0; warn 1% (1e16) at every point.",
+  "943": {
+    "feeDefaults": "0x67e366de6E29289D43894F5587E29FE460405cFf",
+    "strayConfig": {
+      "destinations": [
+        "0x7cD43983A963c62Add34694E83E896c5AfC3333f"
+      ],
+      "weights": [
+        "1000000000000000000"
+      ]
+    },
+    "history": [
+      {
+        "id": "burn-0.5-v1",
+        "destinations": [
+          "0x7cD43983A963c62Add34694E83E896c5AfC3333f"
+        ],
+        "weights": [
+          "1000000000000000000"
+        ],
+        "rates": {
+          "handover": "0",
+          "output": "5000000000000000",
+          "proceeds": "0"
+        },
+        "warn": {
+          "handover": "10000000000000000",
+          "output": "10000000000000000",
+          "proceeds": "10000000000000000"
+        },
+        "label": "PulseX buy & burn (testnet)",
+        "since": "2026-10-03"
+      }
+    ]
+  },
+  "369": {
+    "feeDefaults": "0xE92cB6265497F141125E25a9B5231370632e878E",
+    "strayConfig": {
+      "destinations": [
+        "0xd6cA7ee047a6F45d20d2962E4394E070cF27724F"
+      ],
+      "weights": [
+        "1000000000000000000"
+      ]
+    },
+    "history": [
+      {
+        "id": "burn-0.5-v1",
+        "destinations": [
+          "0xd6cA7ee047a6F45d20d2962E4394E070cF27724F"
+        ],
+        "weights": [
+          "1000000000000000000"
+        ],
+        "rates": {
+          "handover": "0",
+          "output": "5000000000000000",
+          "proceeds": "0"
+        },
+        "warn": {
+          "handover": "10000000000000000",
+          "output": "10000000000000000",
+          "proceeds": "10000000000000000"
+        },
+        "label": "PulseX buy & burn",
+        "since": "2026-10-03"
+      }
+    ]
+  }
+}

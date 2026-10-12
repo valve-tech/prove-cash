@@ -1,0 +1,56 @@
+{
+  "_comment": "PulseChain mainnet 369. Redeployed whole on 2026-10-06 from master 0f20643 / cfd6e85 tree (fee-config-hash). FeeSink/registerFeeSink/settlement-owner gone. FeeDefaults.acceptOwnership from 0x5182\u20262E2 (tx 0x3a6ca8cc\u2026). INTENT_TYPEHASH 0xc1e92b74\u2026. DO NOT use the old settlement's owner key against the superseded set for feeTo=0 principal; that set is abandoned.",
+  "_relayer": "Deployed by the settlement constructor. Approvals on the old relayer are orphaned; permit2 rung keeps Permit2 approvals.",
+  "chainId": 369,
+  "deployedAt": "2026-10-06",
+  "deployer": "0x090e785daDcAF4Acd189305a0b970358e4E0653a",
+  "owner": "0x5182574eE268ABD0A48f97DcfcdE65234E8422E2",
+  "_owner": "Owner of FeeDefaults only. Settlement has no owner.",
+  "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+  "contracts": {
+    "FeeClaimLib": "0x0b169aC0Be0a8062b2f839175Fd2431744Eb83f7",
+    "ProveSettlement": "0x5EB7cAf15f9Fa7Afad9a45d035f7E0F67140fC7b",
+    "ProveRelayer": "0xAc792BBDd72Ce4177Cf1FAD1719d7B68b598268b",
+    "ProveExecutor": "0x2746b99Cd4b8E35539592Be0895B7A5652b04AD7",
+    "ProveCallSink": "0x1a3A59699BE7D908e1460cdAD83cfBd6b9Be4375",
+    "FeeDefaults": "0xE92cB6265497F141125E25a9B5231370632e878E",
+    "ProveReader": "0x8c93958085e4823983b2B811F206874C108C5288",
+    "ProveBatchExecutor": "0xE0925126C969E362195efdbF1f57d1DdF243781c",
+    "ProveBatchExecutorCallSink": "0xBC60540D280e34f7De43F71dB6b1a9397CF44d37",
+    "RfqVenue": "0x6E94A88973f7D1cDcd59A5B0ef21C84eBdA09F04"
+  },
+  "strayConfig": {
+    "destinations": [
+      "0xd6cA7ee047a6F45d20d2962E4394E070cF27724F"
+    ],
+    "weights": [
+      "1000000000000000000"
+    ]
+  },
+  "transactions": {
+    "FeeClaimLib": "0x86e04d8f638a99cd694c99f04a700c9d3f158758ac9df20efc846be7bedd1392",
+    "ProveSettlement": "0x1b64f1cda1f28f40e3df8c744322a4aaf20e099a8f9b69b155d06e80c1329be3",
+    "ProveExecutor": "0x2f19f1784986775bbd24da7d131ae1897ca6aad33cd9a9fddb0921ba08fc0d1a",
+    "FeeDefaults": "0x13d97c5c14bc465594635c6508a8a46dd5294e9718e1d177710b06c24b768568",
+    "FeeDefaults.setDefaults": "0x2ba65ca90a799d45793b994dc8207b3a3405adc8ad798a72a7865ef8822cd5ba",
+    "FeeDefaults.transferOwnership": "0xe3d1495186d2ac1431282078bff90a4293836b72296e5dc765b98d8e62f9eafb",
+    "ProveReader": "0x8f42fd5d61c60c5a2c94297fb9ee9a502b4e8bce94b0dbca505cb7065fa0fddc",
+    "ProveBatchExecutor": "0x241200be69c4762c42add347020714f54148c333a7c0235490f00e7a31802e2f",
+    "RfqVenue": "0x559ec24b4eb35647e97a64880e947ca6434abef9bd454cdcc95e59df3e99cad3",
+    "FeeDefaults.acceptOwnership": "0x3a6ca8cc2ba3a75008a562c925cab587092bcd5b23ab0850494123a07acf727a"
+  },
+  "blocks": {
+    "FeeClaimLib": 27733646,
+    "ProveSettlement": 27733647,
+    "ProveExecutor": 27733648,
+    "FeeDefaults": 27733649,
+    "FeeDefaults.setDefaults": 27733650,
+    "FeeDefaults.transferOwnership": 27733651,
+    "ProveReader": 27733652,
+    "ProveBatchExecutor": 27733694,
+    "RfqVenue": 27733698
+  },
+  "_superseded": "Replaces the 2026-08-22 mainnet set at settlement 0x595ec1C409F63b365ad9f21948E8B040EC5d60EE, relayer 0x25e12d9514d2e63266C1696CCfA30b11b6b66bB3, executor 0x9d31d91453C931e78392934301B6ABD97c468c0A, call sink 0x1a0E21Bd423cd0c2893d34714790a77CfDBE8A0F, venue 0x89C3d80b45C586d8Fa87F4762fa89D30847c9A84, batch executor 0xA20EF4De61d1304ba4510Eb6d881219ecdDc3B53 and its sink 0xC40f93d1e7b77D7a7073a900b27Ac04fF94EcE79. Point nothing at them. The old set's owner key must not be used: feeTo=0 intents were spendable by that key.",
+  "_signatures": "INTENT_TYPEHASH 0xc1e92b7403021c4d577a8f90119021b6820a2c5f1ff61c4ecaf337041f33e772. Domain separator moved. Wire VERSION 5.",
+  "_deploy": "Broadcast via local proxy :18569 injecting X-API-Key. forge script --rpc-url http://127.0.0.1:18569 --broadcast --slow (EIP-1559). FeeClaimLib CREATE2 address matches 943 (same init code)."
+}

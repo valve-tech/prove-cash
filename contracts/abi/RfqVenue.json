@@ -1,0 +1,569 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "_settlement",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "EXCLUSIVE_TYPEHASH",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "LEGS",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "domainSeparator",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "hashExclusive",
+    "inputs": [
+      {
+        "name": "ex",
+        "type": "tuple",
+        "internalType": "struct RfqVenue.Exclusive",
+        "components": [
+          {
+            "name": "intentHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "counterparty",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "take",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "expiry",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "proveBatchCallback",
+    "inputs": [
+      {
+        "name": "owed",
+        "type": "tuple[]",
+        "internalType": "struct IProveBatchCallback.Payment[]",
+        "components": [
+          {
+            "name": "token",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "to",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "fee",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "leg",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeInDue",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeProceeds",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "data",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "relayer",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "settleExclusive",
+    "inputs": [
+      {
+        "name": "reqs",
+        "type": "tuple[]",
+        "internalType": "struct IProveSettlementBatch.FillRequest[]",
+        "components": [
+          {
+            "name": "intent",
+            "type": "tuple",
+            "internalType": "struct IProveSettlementFill.Intent",
+            "components": [
+              {
+                "name": "maker",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "tokenIn",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "tokenOut",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "amountIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutStart",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutEnd",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "startTime",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "endTime",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "executor",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "feeConfig",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeRate",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "minFill",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "authNonce",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "flags",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "nonce",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "curve",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeRateIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "feeRateProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              }
+            ]
+          },
+          {
+            "name": "signature",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "take",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "arming",
+            "type": "bytes",
+            "internalType": "bytes"
+          }
+        ]
+      },
+      {
+        "name": "ex",
+        "type": "tuple",
+        "internalType": "struct RfqVenue.Exclusive",
+        "components": [
+          {
+            "name": "intentHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "counterparty",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "take",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "expiry",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "bindingSignature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "binding",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "settlement",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IProveSettlementBatch"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "spent",
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "ExclusiveFilled",
+    "inputs": [
+      {
+        "name": "binding",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "intentHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "counterparty",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "BadBinding",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "BadSettlement",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "BalanceWentDown",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "BindingExpired",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "BindingIsForAnotherIntent",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "BindingSpent",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "LegCountMismatch",
+    "inputs": [
+      {
+        "name": "planned",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "owed",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "MirrorIsNotFlat",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "MirrorNotExclusiveToThisVenue",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "MirrorNotTakenWhole",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "MirrorOutlivesTheBinding",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotAMirror",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotSettlement",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotTheCounterparty",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotTwoLegs",
+    "inputs": [
+      {
+        "name": "given",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "OwedTokenNotMarked",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "QuoteNotExclusiveToThisVenue",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "Reentered",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "SafeERC20FailedOperation",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "TakeNotBound",
+    "inputs": [
+      {
+        "name": "signed",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "given",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  }
+]

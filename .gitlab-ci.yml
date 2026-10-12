@@ -1,0 +1,250 @@
+# A port of .github/workflows/ci.yml, soak.yml and rehearse-369.yml to GitLab CI.
+#
+# tools/check-ci-parity.py compares tools/run-ci.sh with ci.yml AND with this file's build,
+# contracts, sdk and app jobs. Any other job here must be a scheduled one (see "Scheduled jobs").
+#
+# One image for every job. node:24-bookworm carries git, python3 and node. Foundry is installed
+# pinned to v1.8.0, because the gas ceilings are measured under that version (see ci.yml).
+
+default:
+  image: node:24-bookworm
+  interruptible: true
+
+workflow:
+  rules:
+    # First, so a schedule runs even on a branch with an open merge request.
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_COMMIT_TAG
+
+stages: [build, test, soak]
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  FOUNDRY_VERSION: v1.8.0
+  # The fork suites send the public demo key unless the owner sets PROVE_CI_RPC_KEY.
+  PROVE_CI_RPC_KEY: vk_demo
+
+.foundry: &foundry
+  - curl -sSfL https://foundry.paradigm.xyz | bash
+  - export PATH="$HOME/.foundry/bin:$PATH"
+  - foundryup --install "$FOUNDRY_VERSION"
+  - forge --version
+
+# The pull-request jobs. A scheduled pipeline runs only its own jobs, so it adds no second
+# compile of the same tree next to the soak.
+.on-push:
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "schedule"
+
+# The runners share one 8 GB host, and about 4.3 GB of it is in use before a job starts. One
+# via-IR compile grows to about 3 GB. When three jobs compiled at once, the host ran out of
+# memory and the runner stopped reporting (pipelines 2766, 2775; measured in 2785). So the
+# contracts compile once, here, and the jobs after it take contracts/out as an artifact.
+build:
+  extends: .on-push
+  stage: build
+  timeout: 40m
+  before_script: *foundry
+  script:
+    - cd contracts
+    - forge build
+  artifacts:
+    paths: [contracts/out/, contracts/cache/]
+    expire_in: 1 day
+
+contracts:
+  extends: .on-push
+  stage: test
+  needs: [build]
+  timeout: 90m
+  variables:
+    # check-gas-figures.py refuses a shallow clone.
+    GIT_DEPTH: 0
+  before_script: *foundry
+  script:
+    - cd contracts
+    - forge fmt --check
+    - 'export FOUNDRY_ETH_RPC_HEADERS="[\"X-API-Key: ${PROVE_CI_RPC_KEY}\"]"'
+    - FOUNDRY_PROFILE=fork python3 tools/count-429.py --upstream https://one.valve.city/rpc/evm/369 --max-pct 10 -- forge test --match-path 'test/Fork*.t.sol' -vv -j 1 --compute-units-per-second 165
+    - unset FOUNDRY_ETH_RPC_HEADERS
+    - forge build --sizes
+    - forge test -vv
+    - python3 tools/coverage-gate.py
+    - python3 tools/src-fingerprint.py
+    - python3 tools/check-citations.py
+    - (cd .. && python3 tools/check-tree-pin.py)
+    - (cd .. && python3 tools/check-ci-parity.py)
+    - python3 tools/src-fingerprint.py --compare
+    - forge test --match-path test/Gas.t.sol -vv
+    - (cd .. && node app/scripts/gen-gas.mjs --check)
+    - python3 tools/check-gas-figures.py
+    - bash abi/export.sh --check
+    - cd .. && git diff --exit-code app/src/lib/__fixtures__/
+
+sdk:
+  extends: .on-push
+  stage: test
+  needs: [build]
+  cache:
+    key: npm-sdk
+    paths: [.npm/]
+  script:
+    - npm config set cache "$CI_PROJECT_DIR/.npm"
+    - cd sdk
+    - npm ci
+    - npm run check:abi
+    - npm run lint
+    - npm run typecheck
+    - npm run build
+    - npm test
+
+app:
+  extends: .on-push
+  stage: test
+  # The fee-sink admin CLI test reads contracts/out, which comes from the build job.
+  needs: [build]
+  cache:
+    key: npm-app
+    paths: [.npm/]
+  # The solver tests in scripts/deployment.test.ts start an anvil. This job compiles nothing; it
+  # needs the anvil binary only. Without it those tests fail, because CI is set.
+  before_script: *foundry
+  script:
+    - npm config set cache "$CI_PROJECT_DIR/.npm"
+    - python3 tools/check-typescript-match.py
+    - (cd sdk && npm ci && npm run build)
+    - cd app
+    - npm ci
+    - npm run lint
+    - npx tsc -b
+    - npx tsc -p scripts/tsconfig.json
+    - (cd .. && python3 tools/check-redact.py)
+    - npm test
+    - npm run check:addresses
+    - npm run check:fee-configs
+    - npm run build
+
+# ── Scheduled jobs ────────────────────────────────────────────────────────────────────────────
+#
+# Two pipeline schedules on master drive these, told apart by the SOAK variable:
+#
+#   SOAK=nightly   04:00 UTC daily. The port of .github/workflows/soak.yml.
+#   SOAK=rehearse  05:00 UTC Mondays. The port of .github/workflows/rehearse-369.yml.
+#
+# The runners share one 8 GB host, and one via-IR compile needs about 3 GB. So the nightly
+# compiles once in soak-build, and every job that compiles again runs after the one before it
+# (`needs:`), never beside it. `when: always` keeps the chain going past a red job, so one red
+# gate does not hide the others.
+#
+# Keys: the jobs that talk to a chain send PROVE_CI_RPC_KEY in an X-API-Key header. It falls
+# back to the public vk_demo (see `variables:` above) until the owner sets a masked CI variable.
+
+soak-build:
+  stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SOAK == "nightly"
+  timeout: 40m
+  before_script: *foundry
+  script:
+    - cd contracts
+    - forge build
+  artifacts:
+    paths: [contracts/out/, contracts/cache/]
+    expire_in: 1 day
+
+# 32 runs of 1024 calls: the same call budget the default profile spends, laid out in chains
+# four times longer. See the `soak` profile in foundry.toml.
+soak-invariants:
+  stage: soak
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SOAK == "nightly"
+  needs: [soak-build]
+  timeout: 60m
+  before_script: *foundry
+  script:
+    - cd contracts
+    - FOUNDRY_PROFILE=soak forge test --match-path 'test/*Invariants*.t.sol' -vv
+
+# Testnet 943 still reports the verdict somebody pinned in tools/bytecode-pin-943.json. See
+# soak.yml for why it pins per contract. No --rpc on the command line: the key goes in a
+# header, from PROVE_RPC_KEY.
+soak-deployed:
+  stage: soak
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SOAK == "nightly"
+      when: always
+  needs: [soak-build, soak-invariants]
+  timeout: 30m
+  before_script: *foundry
+  script:
+    - cd contracts
+    - PROVE_RPC_KEY="$PROVE_CI_RPC_KEY" node tools/verify-bytecode.mjs 943 --pin
+
+# The Yul the coverage gate forgives is run by the suite. It builds in its own worktree, so it
+# is a second compile and waits for the job before it. FOUNDRY_THREADS=1 holds it near 1.4 GB.
+soak-yul:
+  stage: soak
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SOAK == "nightly"
+      when: always
+  needs: [soak-deployed]
+  timeout: 90m
+  variables:
+    FOUNDRY_THREADS: "1"
+  before_script: *foundry
+  script:
+    - cd contracts
+    - python3 tools/prove-yul-runs.py
+
+# Every Slither finding has a verdict in docs/slither-triage.md. Its src-only build is a third
+# compile, so it waits for soak-yul. Slither is pinned; the gate refuses another version.
+# node:24-bookworm carries python3.11 without pip, so Slither goes in a venv.
+soak-slither:
+  stage: soak
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SOAK == "nightly"
+      when: always
+  needs: [soak-yul]
+  timeout: 60m
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq python3-venv >/dev/null
+    - python3 -m venv /tmp/slither && /tmp/slither/bin/pip install -q 'slither-analyzer==0.9.6'
+    - curl -sSfL https://foundry.paradigm.xyz | bash
+    - export PATH="$HOME/.foundry/bin:$PATH"
+    - foundryup --install "$FOUNDRY_VERSION"
+  script:
+    - cd contracts
+    - /tmp/slither/bin/python tools/check-slither.py --run
+
+# Every chain answers the opcodes foundry.toml assumes. No compile, so it runs at once.
+soak-opcodes:
+  stage: soak
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SOAK == "nightly"
+  needs: []
+  timeout: 15m
+  script:
+    - (cd sdk && npm ci && npm run build)
+    - cd app
+    - npm ci
+    - npm run check:opcodes
+
+# The mainnet deploy, rehearsed on a fork of 369. Nothing here reaches a real chain: every
+# broadcast goes to an anvil on 127.0.0.1. FOUNDRY_PROFILE=fork is required, because the
+# default profile's paris pin reads PUSH0 in mainnet bytecode as an undefined opcode.
+rehearse-369:
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SOAK == "rehearse"
+  timeout: 60m
+  before_script: *foundry
+  script:
+    - cd contracts
+    - 'export FOUNDRY_ETH_RPC_HEADERS="[\"X-API-Key: ${PROVE_CI_RPC_KEY}\"]"'
+    - PULSECHAIN_RPC=https://one.valve.city/rpc/evm/369 FOUNDRY_PROFILE=fork forge test --match-path 'test/Fork369Rehearsal.t.sol' -vv
+    - unset FOUNDRY_ETH_RPC_HEADERS
+    - PROVE_RPC_KEY="$PROVE_CI_RPC_KEY" bash tools/rehearse-369.sh

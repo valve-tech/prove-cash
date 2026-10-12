@@ -1,0 +1,3278 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "stray",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      },
+      {
+        "name": "_permit2",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "ARM_FROM_PARKED",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "FLAG_ESCROW",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "FLAG_PARTIAL",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "FLAG_PERMIT2",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "INTENT_TYPEHASH",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "STRAY_CONFIG",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "WAD",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "announceFeeConfig",
+    "inputs": [
+      {
+        "name": "cfg",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "armLeg",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "executor",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "h",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "arming",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "booked",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "cancel",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "cancelledAt",
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint64",
+        "internalType": "uint64"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "claim",
+    "inputs": [
+      {
+        "name": "cfg",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      },
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "paid",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "deposit",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "domainSeparator",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "dryRun",
+    "inputs": [
+      {
+        "name": "reqs",
+        "type": "tuple[]",
+        "internalType": "struct ProveSettlement.FillRequest[]",
+        "components": [
+          {
+            "name": "intent",
+            "type": "tuple",
+            "internalType": "struct ProveSettlement.Intent",
+            "components": [
+              {
+                "name": "maker",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "tokenIn",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "tokenOut",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "amountIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutStart",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutEnd",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "startTime",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "endTime",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "executor",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "feeConfig",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeRate",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "minFill",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "authNonce",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "flags",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "nonce",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "curve",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeRateIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "feeRateProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              }
+            ]
+          },
+          {
+            "name": "signature",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "take",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "arming",
+            "type": "bytes",
+            "internalType": "bytes"
+          }
+        ]
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "fill",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "fillBatch",
+    "inputs": [
+      {
+        "name": "reqs",
+        "type": "tuple[]",
+        "internalType": "struct ProveSettlement.FillRequest[]",
+        "components": [
+          {
+            "name": "intent",
+            "type": "tuple",
+            "internalType": "struct ProveSettlement.Intent",
+            "components": [
+              {
+                "name": "maker",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "tokenIn",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "tokenOut",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "amountIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutStart",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutEnd",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "startTime",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "endTime",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "executor",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "feeConfig",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeRate",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "minFill",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "authNonce",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "flags",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "nonce",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "curve",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeRateIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "feeRateProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              }
+            ]
+          },
+          {
+            "name": "signature",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "take",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "arming",
+            "type": "bytes",
+            "internalType": "bytes"
+          }
+        ]
+      },
+      {
+        "name": "skipInvalid",
+        "type": "bool",
+        "internalType": "bool"
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "count",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "fillBatchWithCallback",
+    "inputs": [
+      {
+        "name": "reqs",
+        "type": "tuple[]",
+        "internalType": "struct ProveSettlement.FillRequest[]",
+        "components": [
+          {
+            "name": "intent",
+            "type": "tuple",
+            "internalType": "struct ProveSettlement.Intent",
+            "components": [
+              {
+                "name": "maker",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "tokenIn",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "tokenOut",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "amountIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutStart",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutEnd",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "startTime",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "endTime",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "executor",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "feeConfig",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeRate",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "minFill",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "authNonce",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "flags",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "nonce",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "curve",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeRateIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "feeRateProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              }
+            ]
+          },
+          {
+            "name": "signature",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "take",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "arming",
+            "type": "bytes",
+            "internalType": "bytes"
+          }
+        ]
+      },
+      {
+        "name": "skipInvalid",
+        "type": "bool",
+        "internalType": "bool"
+      },
+      {
+        "name": "data",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "count",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "fillWithAuthorization",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "auth",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Authorization",
+        "components": [
+          {
+            "name": "validAfter",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "validBefore",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "nonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "signature",
+            "type": "bytes",
+            "internalType": "bytes"
+          }
+        ]
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "fillWithCallback",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "data",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "fillWithPermit",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "p",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Permit",
+        "components": [
+          {
+            "name": "value",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "deadline",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "v",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "r",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "s",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          }
+        ]
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "fillWithPermit2",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "p",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Permit2Transfer",
+        "components": [
+          {
+            "name": "token",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amount",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "deadline",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "signature",
+            "type": "bytes",
+            "internalType": "bytes"
+          }
+        ]
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "fillability",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "executor",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "maxFeeRate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "enum ProveSettlement.Reason"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "filled",
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "hashIntent",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "invalidateBefore",
+    "inputs": [
+      {
+        "name": "floor",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "laneFloor",
+    "inputs": [
+      {
+        "name": "maker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "lane",
+        "type": "uint192",
+        "internalType": "uint192"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint64",
+        "internalType": "uint64"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "minOutAt",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "ts",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "nonceFloor",
+    "inputs": [
+      {
+        "name": "maker",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "park",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "parked",
+    "inputs": [
+      {
+        "name": "maker",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pendingFees",
+    "inputs": [
+      {
+        "name": "feeConfig",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "quote",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "ts",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct TakePoints.Quote",
+        "components": [
+          {
+            "name": "take",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "usable",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "owedToMaker",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeOut",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "feeProceeds",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "delivered",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "owed",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "relayer",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "reserved",
+    "inputs": [
+      {
+        "name": "intentHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "sweepUnowned",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "swept",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "totalParked",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "totalPendingFees",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "totalReserved",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "withdraw",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "withdrawParked",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "amount",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "event",
+    "name": "Cancelled",
+    "inputs": [
+      {
+        "name": "intentHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "maker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Deposited",
+    "inputs": [
+      {
+        "name": "intentHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "maker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "token",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "FeeClaimed",
+    "inputs": [
+      {
+        "name": "feeConfig",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "token",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "paid",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "deferred",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "FeeConfigAnnounced",
+    "inputs": [
+      {
+        "name": "feeConfig",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "destinations",
+        "type": "address[]",
+        "indexed": false,
+        "internalType": "address[]"
+      },
+      {
+        "name": "weights",
+        "type": "uint256[]",
+        "indexed": false,
+        "internalType": "uint256[]"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "FeesTaken",
+    "inputs": [
+      {
+        "name": "intentHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "feeConfig",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "feeIn",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "feeOut",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "feeProceeds",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Filled",
+    "inputs": [
+      {
+        "name": "intentHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "maker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "executor",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "tokenIn",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "name": "tokenOut",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "delivered",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "fee",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "NoncesInvalidated",
+    "inputs": [
+      {
+        "name": "maker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "floor",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Parked",
+    "inputs": [
+      {
+        "name": "intentHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "maker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "token",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "ShareDeferred",
+    "inputs": [
+      {
+        "name": "feeConfig",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "token",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "destination",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "StrayConfigSet",
+    "inputs": [
+      {
+        "name": "feeConfig",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "destinations",
+        "type": "address[]",
+        "indexed": false,
+        "internalType": "address[]"
+      },
+      {
+        "name": "weights",
+        "type": "uint256[]",
+        "indexed": false,
+        "internalType": "uint256[]"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Swept",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "feeConfig",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Unparked",
+    "inputs": [
+      {
+        "name": "maker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "token",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "Withdrawn",
+    "inputs": [
+      {
+        "name": "intentHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "maker",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "BadParameter",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "BadSignature",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "BadTerms",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "BelowMinFill",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "DryRun",
+    "inputs": [
+      {
+        "name": "reasons",
+        "type": "uint8[]",
+        "internalType": "enum ProveSettlement.Reason[]"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "EscrowShort",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "Expired",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "FeeTooHigh",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ForbiddenTarget",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InsufficientGas",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidConfig",
+    "inputs": [
+      {
+        "name": "fault",
+        "type": "uint8",
+        "internalType": "enum FeeConfig.Fault"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "IsCancelled",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NonceTooLow",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotMaker",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NotStarted",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "NothingToFill",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "PartialNotAllowed",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "Reentrant",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ReservationUnbacked",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "due",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "SafeERC20FailedOperation",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "TooMuch",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "Underpaid",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "WrongExecutor",
+    "inputs": []
+  }
+]

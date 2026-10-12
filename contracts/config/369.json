@@ -1,0 +1,11 @@
+{
+  "_comment": "PulseChain mainnet. Every address the contracts need, in one place \u2014 nothing is compiled in. The settlement takes no fee of its own and has no owner. Fees go to the destinations of the fee config an intent signs (a hash). The immutable stray config the settlement is constructed with, and the initial FeeDefaults, come from config/fee-configs.json.",
+  "_owner": "The owner of FeeDefaults, the one privileged role left: it publishes SUGGESTED fee defaults (setDefaults) and can touch no funds, no book and no signed intent. Deploy.s.sol deploys FeeDefaults owned by the signer, publishes the initial defaults, and proposes this address; it must call acceptOwnership from its own key. Recommended: a multisig behind a timelock. The settlement has no owner at all.",
+  "owner": "0x5182574eE268ABD0A48f97DcfcdE65234E8422E2",
+  "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+  "deployers": [
+    "0x090e785daDcAF4Acd189305a0b970358e4E0653a"
+  ],
+  "_deployers": "The keys allowed to SIGN a deploy on this chain, and the only ones. Every broadcasting script in contracts/script/ derives the signer's address from the key forge was handed and refuses to continue unless this list names it. One entry, on purpose: MAINNET_DEPLOYER_PK. It is NOT the owner above, and that separation is the whole reason a third key exists \u2014 the owner key deployed the 2026-08-22 set and signs nothing here again. The item titled \u201ctestnet deployer\u201d is a different key and this list refuses it, which is the mistake the check exists to catch. An empty list, a missing key or a missing file stops the deploy; there is no unset-means-skip. PROVE_DEPLOYER overrides this list and narrows it to one address, never widens it.",
+  "_permit2": "Permit2, the canonical deterministic deployment. Verified on chain 2026-08-27: 9,152 bytes of code, byte-identical on 369 and 943. A maker who approves this address keeps that approval through every settlement redeploy, which is the whole point of the permit2 rung \u2014 ProveRelayer moves and Permit2 does not. The settlement refuses a zero here, so a chain without Permit2 cannot be deployed to until somebody deploys one."
+}

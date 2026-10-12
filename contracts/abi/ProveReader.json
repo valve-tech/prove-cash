@@ -1,0 +1,3942 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "settlement_",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "feeDefaults_",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "stray",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "BELOW_MIN_FILL",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "CONFIG_FAULT",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "CONFIG_PREIMAGE_MISMATCH",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "CONFIG_UNRESOLVED",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "CUSTOM_CONFIG",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "DEFAULTS_UNREACHABLE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "DESTINATION_NO_CODE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "EXPIRED",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "FEE_WITHOUT_CONFIG",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "MAX_DESTINATIONS",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "NOT_LIVE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "NOT_STARTED",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "PARTIAL_NOT_ALLOWED",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "QUOTE_FAILED",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "RATE_OVER_WAD",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "TAKE_EXCEEDS_REMAINING",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "TYPEHASH",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "WARN_IN",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "WARN_OUT",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "WARN_PROCEEDS",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "available",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "remaining",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "live",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "explain",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ProveReader.Explanation",
+        "components": [
+          {
+            "name": "identity",
+            "type": "tuple",
+            "internalType": "struct ProveReader.Identity",
+            "components": [
+              {
+                "name": "chainId",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "settlement",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "relayer",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "intentHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "domainSeparator",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "rung",
+                "type": "uint8",
+                "internalType": "enum ProveReader.Rung"
+              },
+              {
+                "name": "isPartial",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "filled",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "remaining",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "reservedForIntent",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "parkedByMaker",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "live",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "take",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "ts",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutNow",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "reason",
+                "type": "uint8",
+                "internalType": "enum ProveSettlement.Reason"
+              },
+              {
+                "name": "signatureChecked",
+                "type": "bool",
+                "internalType": "bool"
+              }
+            ]
+          },
+          {
+            "name": "quote",
+            "type": "tuple",
+            "internalType": "struct TakePoints.Quote",
+            "components": [
+              {
+                "name": "take",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "usable",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owedToMaker",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeProceeds",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "delivered",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owed",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "steps",
+            "type": "tuple[3]",
+            "internalType": "struct TakePoints.Step[3]",
+            "components": [
+              {
+                "name": "point",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "token",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "base",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "rate",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "fee",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "amountBefore",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "amountAfter",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "bearer",
+                "type": "uint8",
+                "internalType": "enum TakePoints.Bearer"
+              },
+              {
+                "name": "backed",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "cell",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "maker",
+            "type": "tuple",
+            "internalType": "struct ProveReader.MakerView",
+            "components": [
+              {
+                "name": "spendToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "spend",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "receiveToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "signedMinimum",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "cutByProceedsFee",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "receiveNet",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "priceSigned",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "priceNet",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeProceeds",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "gasCoverIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "solver",
+            "type": "tuple",
+            "internalType": "struct ProveReader.SolverView",
+            "components": [
+              {
+                "name": "rung",
+                "type": "uint8",
+                "internalType": "enum ProveReader.Rung"
+              },
+              {
+                "name": "handedOver",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "usable",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeInDue",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "terms",
+                "type": "tuple",
+                "internalType": "struct IProveCallback.Terms",
+                "components": [
+                  {
+                    "name": "tokenIn",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amountIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeInDue",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "tokenOut",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "owedToMaker",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeOut",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeProceeds",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "delivered",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "owed",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "deliverNow",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "due",
+                "type": "tuple[]",
+                "internalType": "struct TakePoints.Due[]",
+                "components": [
+                  {
+                    "name": "token",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "allowance",
+                "type": "tuple[]",
+                "internalType": "struct TakePoints.Due[]",
+                "components": [
+                  {
+                    "name": "token",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "maxFeeRateNeeded",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owedOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "config",
+            "type": "tuple",
+            "internalType": "struct ProveReader.ConfigView",
+            "components": [
+              {
+                "name": "hash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "source",
+                "type": "uint8",
+                "internalType": "enum ProveReader.ConfigSource"
+              },
+              {
+                "name": "version",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "resolved",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "hashMatches",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "fault",
+                "type": "uint8",
+                "internalType": "enum FeeConfig.Fault"
+              },
+              {
+                "name": "payouts",
+                "type": "tuple[]",
+                "internalType": "struct ProveReader.Payout[]",
+                "components": [
+                  {
+                    "name": "destination",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "weight",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "hasCode",
+                    "type": "bool",
+                    "internalType": "bool"
+                  },
+                  {
+                    "name": "ofFeeIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "ofFeeOut",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "ofFeeProceeds",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "defaults",
+            "type": "tuple",
+            "internalType": "struct ProveReader.DefaultsView",
+            "components": [
+              {
+                "name": "present",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "version",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "defaultsHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeConfig",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "rateIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "rate",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "rateProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warnIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warnProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "isCurrent",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "isPast",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarnIn",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarn",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarnProceeds",
+                "type": "bool",
+                "internalType": "bool"
+              }
+            ]
+          },
+          {
+            "name": "book",
+            "type": "tuple",
+            "internalType": "struct ProveReader.BookView",
+            "components": [
+              {
+                "name": "pendingTokenIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "pendingTokenOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "totalTokenIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "totalTokenOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "claimInByDestination",
+                "type": "uint256[]",
+                "internalType": "uint256[]"
+              },
+              {
+                "name": "claimOutByDestination",
+                "type": "uint256[]",
+                "internalType": "uint256[]"
+              },
+              {
+                "name": "strayPendingIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "strayPendingOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "tokens",
+            "type": "tuple[2]",
+            "internalType": "struct ProveReader.TokenInfo[2]",
+            "components": [
+              {
+                "name": "token",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "decimals",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "symbol",
+                "type": "string",
+                "internalType": "string"
+              }
+            ]
+          },
+          {
+            "name": "flags",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "explainOut",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "requiredOut",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "ts",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "preimage",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ProveReader.Explanation",
+        "components": [
+          {
+            "name": "identity",
+            "type": "tuple",
+            "internalType": "struct ProveReader.Identity",
+            "components": [
+              {
+                "name": "chainId",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "settlement",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "relayer",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "intentHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "domainSeparator",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "rung",
+                "type": "uint8",
+                "internalType": "enum ProveReader.Rung"
+              },
+              {
+                "name": "isPartial",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "filled",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "remaining",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "reservedForIntent",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "parkedByMaker",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "live",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "take",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "ts",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutNow",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "reason",
+                "type": "uint8",
+                "internalType": "enum ProveSettlement.Reason"
+              },
+              {
+                "name": "signatureChecked",
+                "type": "bool",
+                "internalType": "bool"
+              }
+            ]
+          },
+          {
+            "name": "quote",
+            "type": "tuple",
+            "internalType": "struct TakePoints.Quote",
+            "components": [
+              {
+                "name": "take",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "usable",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owedToMaker",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeProceeds",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "delivered",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owed",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "steps",
+            "type": "tuple[3]",
+            "internalType": "struct TakePoints.Step[3]",
+            "components": [
+              {
+                "name": "point",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "token",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "base",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "rate",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "fee",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "amountBefore",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "amountAfter",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "bearer",
+                "type": "uint8",
+                "internalType": "enum TakePoints.Bearer"
+              },
+              {
+                "name": "backed",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "cell",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "maker",
+            "type": "tuple",
+            "internalType": "struct ProveReader.MakerView",
+            "components": [
+              {
+                "name": "spendToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "spend",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "receiveToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "signedMinimum",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "cutByProceedsFee",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "receiveNet",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "priceSigned",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "priceNet",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeProceeds",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "gasCoverIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "solver",
+            "type": "tuple",
+            "internalType": "struct ProveReader.SolverView",
+            "components": [
+              {
+                "name": "rung",
+                "type": "uint8",
+                "internalType": "enum ProveReader.Rung"
+              },
+              {
+                "name": "handedOver",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "usable",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeInDue",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "terms",
+                "type": "tuple",
+                "internalType": "struct IProveCallback.Terms",
+                "components": [
+                  {
+                    "name": "tokenIn",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amountIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeInDue",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "tokenOut",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "owedToMaker",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeOut",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeProceeds",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "delivered",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "owed",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "deliverNow",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "due",
+                "type": "tuple[]",
+                "internalType": "struct TakePoints.Due[]",
+                "components": [
+                  {
+                    "name": "token",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "allowance",
+                "type": "tuple[]",
+                "internalType": "struct TakePoints.Due[]",
+                "components": [
+                  {
+                    "name": "token",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "maxFeeRateNeeded",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owedOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "config",
+            "type": "tuple",
+            "internalType": "struct ProveReader.ConfigView",
+            "components": [
+              {
+                "name": "hash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "source",
+                "type": "uint8",
+                "internalType": "enum ProveReader.ConfigSource"
+              },
+              {
+                "name": "version",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "resolved",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "hashMatches",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "fault",
+                "type": "uint8",
+                "internalType": "enum FeeConfig.Fault"
+              },
+              {
+                "name": "payouts",
+                "type": "tuple[]",
+                "internalType": "struct ProveReader.Payout[]",
+                "components": [
+                  {
+                    "name": "destination",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "weight",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "hasCode",
+                    "type": "bool",
+                    "internalType": "bool"
+                  },
+                  {
+                    "name": "ofFeeIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "ofFeeOut",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "ofFeeProceeds",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "defaults",
+            "type": "tuple",
+            "internalType": "struct ProveReader.DefaultsView",
+            "components": [
+              {
+                "name": "present",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "version",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "defaultsHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeConfig",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "rateIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "rate",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "rateProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warnIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warnProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "isCurrent",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "isPast",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarnIn",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarn",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarnProceeds",
+                "type": "bool",
+                "internalType": "bool"
+              }
+            ]
+          },
+          {
+            "name": "book",
+            "type": "tuple",
+            "internalType": "struct ProveReader.BookView",
+            "components": [
+              {
+                "name": "pendingTokenIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "pendingTokenOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "totalTokenIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "totalTokenOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "claimInByDestination",
+                "type": "uint256[]",
+                "internalType": "uint256[]"
+              },
+              {
+                "name": "claimOutByDestination",
+                "type": "uint256[]",
+                "internalType": "uint256[]"
+              },
+              {
+                "name": "strayPendingIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "strayPendingOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "tokens",
+            "type": "tuple[2]",
+            "internalType": "struct ProveReader.TokenInfo[2]",
+            "components": [
+              {
+                "name": "token",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "decimals",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "symbol",
+                "type": "string",
+                "internalType": "string"
+              }
+            ]
+          },
+          {
+            "name": "flags",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "explainSigned",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "executor",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "ts",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "preimage",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "e",
+        "type": "tuple",
+        "internalType": "struct ProveReader.Explanation",
+        "components": [
+          {
+            "name": "identity",
+            "type": "tuple",
+            "internalType": "struct ProveReader.Identity",
+            "components": [
+              {
+                "name": "chainId",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "settlement",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "relayer",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "intentHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "domainSeparator",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "rung",
+                "type": "uint8",
+                "internalType": "enum ProveReader.Rung"
+              },
+              {
+                "name": "isPartial",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "filled",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "remaining",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "reservedForIntent",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "parkedByMaker",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "live",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "take",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "ts",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutNow",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "reason",
+                "type": "uint8",
+                "internalType": "enum ProveSettlement.Reason"
+              },
+              {
+                "name": "signatureChecked",
+                "type": "bool",
+                "internalType": "bool"
+              }
+            ]
+          },
+          {
+            "name": "quote",
+            "type": "tuple",
+            "internalType": "struct TakePoints.Quote",
+            "components": [
+              {
+                "name": "take",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "usable",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owedToMaker",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeProceeds",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "delivered",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owed",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "steps",
+            "type": "tuple[3]",
+            "internalType": "struct TakePoints.Step[3]",
+            "components": [
+              {
+                "name": "point",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "token",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "base",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "rate",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "fee",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "amountBefore",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "amountAfter",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "bearer",
+                "type": "uint8",
+                "internalType": "enum TakePoints.Bearer"
+              },
+              {
+                "name": "backed",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "cell",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "maker",
+            "type": "tuple",
+            "internalType": "struct ProveReader.MakerView",
+            "components": [
+              {
+                "name": "spendToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "spend",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "receiveToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "signedMinimum",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "cutByProceedsFee",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "receiveNet",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "priceSigned",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "priceNet",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeProceeds",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "gasCoverIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "solver",
+            "type": "tuple",
+            "internalType": "struct ProveReader.SolverView",
+            "components": [
+              {
+                "name": "rung",
+                "type": "uint8",
+                "internalType": "enum ProveReader.Rung"
+              },
+              {
+                "name": "handedOver",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "usable",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeInDue",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "terms",
+                "type": "tuple",
+                "internalType": "struct IProveCallback.Terms",
+                "components": [
+                  {
+                    "name": "tokenIn",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amountIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeInDue",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "tokenOut",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "owedToMaker",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeOut",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeProceeds",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "delivered",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "owed",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "deliverNow",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "due",
+                "type": "tuple[]",
+                "internalType": "struct TakePoints.Due[]",
+                "components": [
+                  {
+                    "name": "token",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "allowance",
+                "type": "tuple[]",
+                "internalType": "struct TakePoints.Due[]",
+                "components": [
+                  {
+                    "name": "token",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "maxFeeRateNeeded",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owedOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "config",
+            "type": "tuple",
+            "internalType": "struct ProveReader.ConfigView",
+            "components": [
+              {
+                "name": "hash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "source",
+                "type": "uint8",
+                "internalType": "enum ProveReader.ConfigSource"
+              },
+              {
+                "name": "version",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "resolved",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "hashMatches",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "fault",
+                "type": "uint8",
+                "internalType": "enum FeeConfig.Fault"
+              },
+              {
+                "name": "payouts",
+                "type": "tuple[]",
+                "internalType": "struct ProveReader.Payout[]",
+                "components": [
+                  {
+                    "name": "destination",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "weight",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "hasCode",
+                    "type": "bool",
+                    "internalType": "bool"
+                  },
+                  {
+                    "name": "ofFeeIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "ofFeeOut",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "ofFeeProceeds",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "defaults",
+            "type": "tuple",
+            "internalType": "struct ProveReader.DefaultsView",
+            "components": [
+              {
+                "name": "present",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "version",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "defaultsHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeConfig",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "rateIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "rate",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "rateProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warnIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warnProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "isCurrent",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "isPast",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarnIn",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarn",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarnProceeds",
+                "type": "bool",
+                "internalType": "bool"
+              }
+            ]
+          },
+          {
+            "name": "book",
+            "type": "tuple",
+            "internalType": "struct ProveReader.BookView",
+            "components": [
+              {
+                "name": "pendingTokenIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "pendingTokenOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "totalTokenIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "totalTokenOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "claimInByDestination",
+                "type": "uint256[]",
+                "internalType": "uint256[]"
+              },
+              {
+                "name": "claimOutByDestination",
+                "type": "uint256[]",
+                "internalType": "uint256[]"
+              },
+              {
+                "name": "strayPendingIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "strayPendingOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "tokens",
+            "type": "tuple[2]",
+            "internalType": "struct ProveReader.TokenInfo[2]",
+            "components": [
+              {
+                "name": "token",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "decimals",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "symbol",
+                "type": "string",
+                "internalType": "string"
+              }
+            ]
+          },
+          {
+            "name": "flags",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "explainTake",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "take",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "ts",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "preimage",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ProveReader.Explanation",
+        "components": [
+          {
+            "name": "identity",
+            "type": "tuple",
+            "internalType": "struct ProveReader.Identity",
+            "components": [
+              {
+                "name": "chainId",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "settlement",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "relayer",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "intentHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "domainSeparator",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "rung",
+                "type": "uint8",
+                "internalType": "enum ProveReader.Rung"
+              },
+              {
+                "name": "isPartial",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "filled",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "remaining",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "reservedForIntent",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "parkedByMaker",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "live",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "take",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "ts",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "minOutNow",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "reason",
+                "type": "uint8",
+                "internalType": "enum ProveSettlement.Reason"
+              },
+              {
+                "name": "signatureChecked",
+                "type": "bool",
+                "internalType": "bool"
+              }
+            ]
+          },
+          {
+            "name": "quote",
+            "type": "tuple",
+            "internalType": "struct TakePoints.Quote",
+            "components": [
+              {
+                "name": "take",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "usable",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owedToMaker",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeProceeds",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "delivered",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owed",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "steps",
+            "type": "tuple[3]",
+            "internalType": "struct TakePoints.Step[3]",
+            "components": [
+              {
+                "name": "point",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "token",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "base",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "rate",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "fee",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "amountBefore",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "amountAfter",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "bearer",
+                "type": "uint8",
+                "internalType": "enum TakePoints.Bearer"
+              },
+              {
+                "name": "backed",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "cell",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              }
+            ]
+          },
+          {
+            "name": "maker",
+            "type": "tuple",
+            "internalType": "struct ProveReader.MakerView",
+            "components": [
+              {
+                "name": "spendToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "spend",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "receiveToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "signedMinimum",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "cutByProceedsFee",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "receiveNet",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "priceSigned",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "priceNet",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeProceeds",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "gasCoverIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "solver",
+            "type": "tuple",
+            "internalType": "struct ProveReader.SolverView",
+            "components": [
+              {
+                "name": "rung",
+                "type": "uint8",
+                "internalType": "enum ProveReader.Rung"
+              },
+              {
+                "name": "handedOver",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "usable",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "feeInDue",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "terms",
+                "type": "tuple",
+                "internalType": "struct IProveCallback.Terms",
+                "components": [
+                  {
+                    "name": "tokenIn",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amountIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeInDue",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "tokenOut",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "owedToMaker",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeOut",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "feeProceeds",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "delivered",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "owed",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "deliverNow",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "due",
+                "type": "tuple[]",
+                "internalType": "struct TakePoints.Due[]",
+                "components": [
+                  {
+                    "name": "token",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "allowance",
+                "type": "tuple[]",
+                "internalType": "struct TakePoints.Due[]",
+                "components": [
+                  {
+                    "name": "token",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              },
+              {
+                "name": "maxFeeRateNeeded",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "owedOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "config",
+            "type": "tuple",
+            "internalType": "struct ProveReader.ConfigView",
+            "components": [
+              {
+                "name": "hash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "source",
+                "type": "uint8",
+                "internalType": "enum ProveReader.ConfigSource"
+              },
+              {
+                "name": "version",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "resolved",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "hashMatches",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "fault",
+                "type": "uint8",
+                "internalType": "enum FeeConfig.Fault"
+              },
+              {
+                "name": "payouts",
+                "type": "tuple[]",
+                "internalType": "struct ProveReader.Payout[]",
+                "components": [
+                  {
+                    "name": "destination",
+                    "type": "address",
+                    "internalType": "address"
+                  },
+                  {
+                    "name": "weight",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "hasCode",
+                    "type": "bool",
+                    "internalType": "bool"
+                  },
+                  {
+                    "name": "ofFeeIn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "ofFeeOut",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  },
+                  {
+                    "name": "ofFeeProceeds",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "defaults",
+            "type": "tuple",
+            "internalType": "struct ProveReader.DefaultsView",
+            "components": [
+              {
+                "name": "present",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "version",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "defaultsHash",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "feeConfig",
+                "type": "bytes32",
+                "internalType": "bytes32"
+              },
+              {
+                "name": "rateIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "rate",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "rateProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warnIn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warn",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "warnProceeds",
+                "type": "uint64",
+                "internalType": "uint64"
+              },
+              {
+                "name": "isCurrent",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "isPast",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarnIn",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarn",
+                "type": "bool",
+                "internalType": "bool"
+              },
+              {
+                "name": "aboveWarnProceeds",
+                "type": "bool",
+                "internalType": "bool"
+              }
+            ]
+          },
+          {
+            "name": "book",
+            "type": "tuple",
+            "internalType": "struct ProveReader.BookView",
+            "components": [
+              {
+                "name": "pendingTokenIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "pendingTokenOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "totalTokenIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "totalTokenOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "claimInByDestination",
+                "type": "uint256[]",
+                "internalType": "uint256[]"
+              },
+              {
+                "name": "claimOutByDestination",
+                "type": "uint256[]",
+                "internalType": "uint256[]"
+              },
+              {
+                "name": "strayPendingIn",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "strayPendingOut",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          },
+          {
+            "name": "tokens",
+            "type": "tuple[2]",
+            "internalType": "struct ProveReader.TokenInfo[2]",
+            "components": [
+              {
+                "name": "token",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "decimals",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "symbol",
+                "type": "string",
+                "internalType": "string"
+              }
+            ]
+          },
+          {
+            "name": "flags",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "fault",
+    "inputs": [
+      {
+        "name": "c",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8",
+        "internalType": "enum FeeConfig.Fault"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "feeDefaults",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IFeeDefaultsRead"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "feeOf",
+    "inputs": [
+      {
+        "name": "base",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "rate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "grossForNet",
+    "inputs": [
+      {
+        "name": "net",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "rate",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "hash",
+    "inputs": [
+      {
+        "name": "c",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "remember",
+    "inputs": [
+      {
+        "name": "cfg",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "h",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "remembered",
+    "inputs": [
+      {
+        "name": "h",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "settlement",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IProveSettlementRead"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "single",
+    "inputs": [
+      {
+        "name": "destination",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct FeeConfig.Config",
+        "components": [
+          {
+            "name": "destinations",
+            "type": "address[]",
+            "internalType": "address[]"
+          },
+          {
+            "name": "weights",
+            "type": "uint256[]",
+            "internalType": "uint256[]"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "singleHash",
+    "inputs": [
+      {
+        "name": "destination",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "split",
+    "inputs": [
+      {
+        "name": "amount",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "weights",
+        "type": "uint256[]",
+        "internalType": "uint256[]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]",
+        "internalType": "uint256[]"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "takeForOut",
+    "inputs": [
+      {
+        "name": "i",
+        "type": "tuple",
+        "internalType": "struct ProveSettlement.Intent",
+        "components": [
+          {
+            "name": "maker",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "recipient",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenIn",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "tokenOut",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutStart",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minOutEnd",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "startTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "endTime",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "executor",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "feeConfig",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRate",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "minFill",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "authNonce",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "flags",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "curve",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "feeRateIn",
+            "type": "uint64",
+            "internalType": "uint64"
+          },
+          {
+            "name": "feeRateProceeds",
+            "type": "uint64",
+            "internalType": "uint64"
+          }
+        ]
+      },
+      {
+        "name": "requiredOut",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "ts",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "Remembered",
+    "inputs": [
+      {
+        "name": "feeConfig",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "destinations",
+        "type": "address[]",
+        "indexed": false,
+        "internalType": "address[]"
+      },
+      {
+        "name": "weights",
+        "type": "uint256[]",
+        "indexed": false,
+        "internalType": "uint256[]"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "InvalidConfig",
+    "inputs": [
+      {
+        "name": "fault",
+        "type": "uint8",
+        "internalType": "enum FeeConfig.Fault"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "StrayMismatch",
+    "inputs": []
+  }
+]

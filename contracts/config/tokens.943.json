@@ -1,0 +1,54 @@
+{
+  "_comment": "The test portfolio for PulseChain v4 testnet. Every amount is in whole tokens; the script scales it by the decimals of the token it belongs to. Decimals are mixed on purpose, so the settlement quote is exercised at 18, 8 and 6. The owner is a valve address, never the throwaway key that signs the deploy. Set PROVE_TOKEN_OWNER to override it without an edit-and-commit.",
+  "owner": "0x5182574eE268ABD0A48f97DcfcdE65234E8422E2",
+  "tokens": [
+    {
+      "name": "Test PulseX",
+      "symbol": "tPLSX",
+      "decimals": 18,
+      "drip": 25000,
+      "cooldownHours": 6,
+      "seed": 10000000
+    },
+    {
+      "name": "Test HEX",
+      "symbol": "tHEX",
+      "decimals": 8,
+      "drip": 5000,
+      "cooldownHours": 6,
+      "seed": 2000000
+    },
+    {
+      "name": "Test USD Coin",
+      "symbol": "tUSDC",
+      "decimals": 6,
+      "drip": 1000,
+      "cooldownHours": 6,
+      "seed": 500000
+    },
+    {
+      "name": "Test Tether USD",
+      "symbol": "tUSDT",
+      "decimals": 6,
+      "drip": 1000,
+      "cooldownHours": 6,
+      "seed": 500000
+    },
+    {
+      "name": "Test Wrapped Bitcoin",
+      "symbol": "tWBTC",
+      "decimals": 8,
+      "drip": 1,
+      "cooldownHours": 24,
+      "seed": 100
+    },
+    {
+      "name": "Test Wrapped Ether",
+      "symbol": "tWETH",
+      "decimals": 18,
+      "drip": 10,
+      "cooldownHours": 12,
+      "seed": 2000
+    }
+  ]
+}

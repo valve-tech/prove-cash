@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+#
+# Refuse to push a commit the local CI run has not covered.
+#
+# The coverage gate was red on `master` for four days. Every gate in this repository worked; none
+# had been asked, because CI runs on push and 87 commits had never been pushed. A gate nobody runs
+# is not a control, so this makes running one a condition of pushing.
+#
+#   tools/run-ci.sh          runs every job and, on a clean tree, writes `.ci-local-pass`
+#   git push --no-verify     skips this, when you mean to
+#
+# **What the stamp covers: every gate that guards a pull request, and no more.**
+# `tools/check-ci-parity.py` compares this runner with `ci.yml` alone, and it holds a `CI_ONLY`
+# list of steps the runner deliberately skips, currently empty — so a stamp means every step of
+# `ci.yml` ran here. If an entry ever appears in `CI_ONLY`, it is a declared hole, and the parity
+# checker will not let it go undeclared.
+#
+# **`soak.yml` is outside that comparison**, and this paragraph used to claim "everything CI runs"
+# without saying so. A stamp has never covered the nightly job: the deep invariant campaigns,
+# `prove-yul-runs.py`, `check:opcodes`, Slither and its triage gate, and the bytecode comparison
+# against testnet 943. Those run
+# overnight, and a push does not wait for them.
+#
+# It compares the stamp with the exact commit you are pushing, not with HEAD, so amending or
+# rebasing after the run invalidates it — which is the point.
+set -uo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+STAMP="$ROOT/.ci-local-pass"
+ZERO=0000000000000000000000000000000000000000
+
+fail() {
+  echo "pre-push: $1" >&2
+  echo >&2
+  echo "  run:    tools/run-ci.sh" >&2
+  echo "  or:     git push --no-verify   (and say why in the pull request)" >&2
+  exit 1
+}
+
+[ -f "$STAMP" ] || fail "no .ci-local-pass. Nothing has run the gates on this tree."
+stamped="$(cat "$STAMP")"
+
+while read -r _local_ref local_sha _remote_ref _remote_sha; do
+  # A delete pushes the zero sha and carries no tree to check.
+  [ "$local_sha" = "$ZERO" ] && continue
+  if [ "$local_sha" != "$stamped" ]; then
+    fail "the stamp is ${stamped:0:12} and you are pushing ${local_sha:0:12}."
+  fi
+done
+
+exit 0

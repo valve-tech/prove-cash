@@ -1,0 +1,6 @@
+# prove.cash — report a bug or a security hole over SimpleX chat.
+# SimpleX needs no account, email or phone number.
+Contact: https://smp12.simplex.im/a#bU9ltr40p0c5WoAxDzKy1RdSqhcwi3EqQkduz-_EusU
+Expires: 2027-09-10T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://prove.cash/.well-known/security.txt

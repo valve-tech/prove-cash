@@ -1,0 +1,80 @@
+# The mainnet deploy, rehearsed on a fork of chain 369 before it is done for real.
+#
+# A deploy is the one thing in this repository that cannot be re-run. A wrong test is a red CI job;
+# a wrong deploy is an address on chain that somebody has already approved. This workflow runs the
+# committed configuration against mainnet as it stands, deploys the whole set on a fork, and proves
+# the result is wired correctly and fills.
+#
+# It lives here rather than in `ci.yml` for the reason `soak.yml` gives for its `opcodes` job: it
+# talks to a chain. A network call in the pull-request job reddens a build for a reason that has
+# nothing to do with the change, and a gate that fails for unrelated reasons is a gate people learn
+# to ignore. `tools/check-ci-parity.py` reads `ci.yml` alone, so the local runner's step list stays
+# the mirror of the pull-request job and nothing here widens it.
+#
+# The fork suite it runs also matches `test/Fork*.t.sol`, so the pull-request job already runs the
+# same file. This workflow adds the half that forge cannot host: a real `forge script … --broadcast`
+# through all three deploy scripts and their guards, signed by a key generated on the runner and
+# thrown away with the fork.
+#
+# **Nothing here reaches a real chain.** The mainnet endpoint is read from and never written to;
+# every broadcast goes to an anvil on 127.0.0.1, and the script refuses to sign against anything
+# else. No deployer key is read, and none is needed: `PROVE_DEPLOYER` narrows the allowed signer
+# list to the throwaway address.
+name: rehearse-369
+
+on:
+  # Before a mainnet deploy, which is what this exists for.
+  workflow_dispatch:
+  # And weekly, so the answer is never older than the chain it describes. Mainnet moves under a
+  # deploy plan that is written once: liquidity, the buy-and-burn's settings and Permit2's presence
+  # are all facts with a date on them.
+  schedule:
+    # 05:00 UTC on Mondays, an hour after the soak.
+    - cron: "0 5 * * 1"
+
+jobs:
+  # Named for what a reader needs to know from the job list alone: this is the 369 rehearsal.
+  mainnet-fork-rehearsal:
+    name: The mainnet deploy, rehearsed on a fork of 369
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      # Pinned to the version the gas ceilings were measured with. See ci.yml for why.
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.0
+
+      # `FOUNDRY_PROFILE=fork` is not optional, and the failure it avoids is silent. The default
+      # profile pins `evm_version = "paris"`, which has no PUSH0, so forge reads `0x5f` in somebody
+      # else's mainnet bytecode as an undefined opcode: the frame burns every remaining unit of gas
+      # and reverts with no data. A billion-gas revert in this job is that pin, never the contracts.
+      #
+      # The endpoint is the valve gateway. Its URL holds no key, so it goes in the command. It is
+      # not a third-party node on purpose: a third-party node drops transactions silently, and a
+      # rehearsal whose failures are ambiguous proves nothing.
+      #
+      # The key goes in an `X-API-Key` header, never in the URL path, because a path reaches
+      # access logs and every upstream hop. `[profile.fork]` sends the public demo key, and
+      # `PROVE_CI_RPC_KEY` replaces it when the repository sets it. Unset, both expressions still
+      # give `vk_demo`: an empty `FOUNDRY_ETH_RPC_HEADERS` would delete the profile header.
+      - name: The committed config deploys and fills on a fork of 369
+        run: PULSECHAIN_RPC=https://one.valve.city/rpc/evm/369 FOUNDRY_PROFILE=fork forge test --match-path 'test/Fork369Rehearsal.t.sol' -vv
+        working-directory: contracts
+        env:
+          FOUNDRY_ETH_RPC_HEADERS: >-
+            ${{ format('["X-API-Key: {0}"]', secrets.PROVE_CI_RPC_KEY || 'vk_demo') }}
+
+      # The half a forge test cannot host. `PROVE_DEPLOYER`, `PROVE_SETTLEMENT` and
+      # `PROVE_SETTLEMENT_OFF_RECORD` are process environment rather than EVM state, and forge runs
+      # test contracts in parallel, so a test that set them would race `Deploy.t.sol`. This script
+      # owns its own process and its own anvil, and drives all three deploy scripts through their
+      # guards the way an operator does.
+      - name: All three deploy scripts broadcast against a fork of 369
+        run: bash tools/rehearse-369.sh
+        working-directory: contracts
+        env:
+          PROVE_RPC_KEY: ${{ secrets.PROVE_CI_RPC_KEY || 'vk_demo' }}

@@ -1,0 +1,770 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #05070a;
+  --color-panel: #0b0f14;
+  --color-panel-2: #10161d;
+  --color-line: #1b242e;
+  --color-line-bright: #2a3846;
+  /*
+    Dim carries real content — countdowns, units, addresses — at 11px and 12px, so it is normal
+    text and owes WCAG AA 4.5:1. The old #6b7c8d measured 4.48:1 on --color-panel and 4.24:1 on
+    --color-panel-2, so it failed on both. This clears 5.4:1 on every surface it sits on.
+  */
+  --color-dim: #7d8fa1;
+  --color-body: #aebccb;
+  --color-bright: #e8f0f7;
+  --color-proven: #35e08a;
+  --color-unproven: #f0a83c;
+  --color-danger: #ff5c66;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/*
+  The page never scrolls sideways. A table that is wider than the screen scrolls inside its own
+  container, and only there.
+
+  `clip`, not `hidden`: `hidden` makes the element a scroll container, which would take the
+  sticky header and the sticky selection tray with it.
+*/
+html,
+body {
+  overflow-x: clip;
+}
+
+/*
+  Two washes bleeding in over the top corners, and ink everywhere else.
+
+  `no-repeat` is load-bearing. A background on `body` is sized against the body box and painted
+  across the whole canvas, so the default `repeat` tiled both washes every 1242px and printed the
+  same glow three times down the landing page.
+*/
+body {
+  background:
+    radial-gradient(1100px 600px at 12% -12%, #0d2a20 0%, transparent 62%),
+    radial-gradient(900px 500px at 100% 0%, #121a2a 0%, transparent 55%),
+    var(--color-ink);
+  background-repeat: no-repeat;
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+  Numbers are the content here. They get their own face and their own alignment.
+
+  `isolate` is the right-to-left half of that. A figure is a left-to-right run whatever language
+  surrounds it, and dropped bare into an Arabic sentence the bidi algorithm lets the neutral
+  characters at its ends — a leading `+`, a trailing `%`, the spaces around a unit — join the
+  Arabic run instead. `12.34 WPLS +` is the result. An isolated run cannot be reordered by its
+  neighbours, so the figure reads the same in every language.
+*/
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-num, -0.01em);
+  unicode-bidi: isolate;
+}
+
+/*
+  One caveat on the above, and it applies to every `.num` string in the app rather than to any one
+  screen: none of `ui-monospace`, `SF Mono`, `JetBrains Mono` or `Menlo` carries Arabic or Hebrew.
+
+  So in `ar` and `he` a `.num` run that holds a word is drawn in two faces at once. The digits
+  keep `tabular-nums` and their fixed advance; the browser substitutes a proportional face for the
+  word beside them. A column of figures still lines up — the digits are the part that has to — but
+  the WIDTH of any `.num` string containing a word is not deterministic in those two languages and
+  cannot be worked out from a character count.
+
+  Measured in headless Chromium on 2026-09-07 through `getComputedTextLength()`. It cost the fill
+  console a third of its price chart: three labels sized against the English string covered the
+  curves they annotate. Anything laid out against a `.num` width — a fixed column, a reserved
+  gutter, a truncation point — has to be measured in the language it will be read in, or built out
+  of digits alone. `landing/console/geometry.ts` takes the second route and says why.
+*/
+
+/*
+  One expression, laid out left to right, wherever it lands.
+
+  `.num` isolates a figure but keeps the line's direction, which is what you want for a figure and
+  its unit: an Arabic reader meets `8.13` first and `tUSDC` after it, exactly as they would read
+  `٨٫١٣ دولار`. A written expression is different. `1 WPLS ≥ 2.5 PLSX` is one sentence in symbols,
+  and the bidi algorithm cuts the leading `1` off the front of it and parks it at the far end. Use
+  this on an expression, never on a bare figure. A signed figure is an expression: inside `.num`
+  alone its `+` still lands at the far end, and `+0.50%` prints as `0.50%+`.
+*/
+.ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/*
+  A chart is a picture of a physical axis, so it never mirrors.
+
+  Size runs along x and rate up y because the data says so, and a mirrored plot would claim the
+  opposite. SVG's `text-anchor: start|end` does follow `direction`, so without this every axis
+  label on an Arabic page jumps to the far side of the tick it names. The words inside a label are
+  still laid out by the bidi algorithm; only the frame holds still.
+*/
+.chart {
+  direction: ltr;
+}
+
+/*
+  A hex address, shortened or not, is one unbroken word. Nothing in it offers the line a place to
+  break, so on a phone the address sets the width and pushes its row past the viewport. Below the
+  gutter breakpoint it breaks between characters instead. Above it there is room, and it holds one
+  line.
+*/
+.addr {
+  word-break: break-all;
+}
+@media (width >= 40rem) {
+  .addr {
+    word-break: normal;
+    white-space: nowrap;
+  }
+}
+
+/*
+  Surfaces.
+
+  Nothing here is rounded and nothing here carries a border. Every one of these can reach the edge
+  of a narrow viewport, where a curve shows a sliver of the page through each corner and a border
+  draws a line a reader cannot tell from a scrollbar. The outline is an outset shadow instead: it
+  costs no layout width, and when the surface does meet the edge its side lines fall off screen
+  and the top and bottom rules are all that remain.
+*/
+.panel {
+  background: color-mix(in oklab, var(--color-panel) 88%, transparent);
+  box-shadow: 0 0 0 1px var(--color-line);
+}
+/* The compose form's field groups sit on ink, so they read as inputs rather than as panels. */
+.panel-ink {
+  background: var(--color-ink);
+  box-shadow: 0 0 0 1px var(--color-line);
+}
+/*
+  A card that is one field.
+
+  The amount inputs on the sign page are transparent boxes inside a padded card. The shared focus
+  ring drew itself tight around the digits — a small rectangle floating inside a much larger
+  surface, while the card that actually reads as "the thing you are typing in" stayed unmarked.
+
+  So the card takes the ring, by thickening the outline it already has rather than adding a second
+  one outside it. An outset shadow costs no layout width, so this cannot push the card past a
+  narrow viewport the way an `outline-offset` ring could.
+
+  `:has()` rather than `:focus-within` on purpose. The card also holds a token button and a max
+  button, and those are separate controls: lighting the whole card for them would say "you are on
+  the field" when you are not. They keep their own rings; only the amount hands its ring over.
+*/
+.field-card:has(.field-amount:focus-visible) {
+  box-shadow: 0 0 0 2px var(--color-proven);
+}
+/*
+  The one place a control gives up its own focus ring — and only because a bigger one appears on
+  the same event, so there is never a frame with no ring at all. Scoped to this input by class, so
+  no utility and no other control can reach it.
+*/
+.field-amount:focus-visible {
+  outline: none;
+}
+
+/* The selection tray floats over the board, so it carries a lift as well as an outline. */
+.panel-float {
+  background: color-mix(in oklab, var(--color-panel) 96%, transparent);
+  box-shadow:
+    0 0 0 1px var(--color-line),
+    0 0 32px -6px rgb(0 0 0 / 0.6);
+}
+
+/* A single hairline, drawn outside the box, so it takes no layout height and has no ends to show. */
+.rule-t {
+  box-shadow: 0 -1px 0 0 var(--color-line);
+}
+.rule-b {
+  box-shadow: 0 1px 0 0 var(--color-line);
+}
+.rule-y {
+  box-shadow:
+    0 -1px 0 0 var(--color-line),
+    0 1px 0 0 var(--color-line);
+}
+
+/* Borders survive only on controls, which always sit inside someone else's padding. */
+.hair {
+  border-color: var(--color-line);
+}
+
+/*
+  A caveat behind a hover. Both surfaces draw it, so it lives here rather than in the `<style>`
+  tag the landing page injects — the app route never mounts that tag, and the app needs the same
+  tip on the sign page and in the nav.
+
+  The body anchors to the nearest positioned ancestor and spans its width. A tip centred on its
+  own label runs off a 375px screen; a tip that inherits its row's width cannot.
+*/
+.tip {
+  cursor: help;
+}
+.tip-label {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--color-dim);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.tip-body {
+  position: absolute;
+  inset-inline: 0;
+  bottom: calc(100% + 6px);
+  z-index: 50;
+  /* A narrow label column used to crush the paragraph to ~80px; keep a readable floor. */
+  min-width: 14rem;
+  padding: 0.5rem 0.65rem;
+  background: var(--color-panel-2);
+  box-shadow:
+    0 0 0 1px var(--color-line-bright),
+    0 12px 32px -8px rgb(0 0 0 / 0.7);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-transform: none;
+  text-align: start;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 120ms ease,
+    visibility 120ms ease;
+}
+/*
+  Under the trigger, not over it, and sized to its own text. A nav icon's positioned ancestor is
+  the whole header, so `inset-inline: 0` would stretch the tip across the page.
+
+  `left`/`translateX` stay physical, and they are correct in both directions: the pair centres the
+  body on the trigger rather than pinning it to a side, and a centre is the same point whichever
+  way the line runs.
+*/
+.tip-under {
+  inset-inline: auto;
+  bottom: auto;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 15rem;
+  text-align: center;
+}
+/*
+  Beside the trigger, for a glyph in a table row. The row lives in a sideways scroller, and a
+  body above or below the row leaves the row's box and hands the scroller a vertical scrollbar.
+  A body beside the glyph stays on the row's own line.
+*/
+.tip-beside {
+  inset-inline: auto;
+  inset-inline-start: calc(100% + 6px);
+  bottom: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  width: max-content;
+  max-width: 15rem;
+  padding: 0.3rem 0.5rem;
+}
+/* At the trailing edge of a row-wide trigger, just above the glyph it names. */
+.tip-end {
+  inset-inline: auto;
+  inset-inline-end: 0;
+  bottom: calc(100% - 4px);
+  width: max-content;
+  max-width: 15rem;
+  padding: 0.3rem 0.5rem;
+}
+.tip:hover > .tip-body,
+.tip:focus > .tip-body,
+.tip:focus-within > .tip-body {
+  opacity: 1;
+  visibility: visible;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tip-body {
+    transition: none;
+  }
+}
+
+/*
+  One gutter, one layer.
+
+  A padded wrapper holding padded cards spends the gutter twice, and on a 375px phone that is a
+  tenth of the screen for nothing. So the gutter lives on the innermost thing that needs it — a
+  paragraph, a table row, a card's own padding — and `bleed` cancels it for anything that should
+  run the whole width. Both are the same measure, so a card's contents line up with the prose
+  above it.
+*/
+.gutter {
+  padding-inline: 0.5rem;
+}
+.bleed {
+  margin-inline: -0.5rem;
+}
+@media (width >= 40rem) {
+  .gutter {
+    padding-inline: 1rem;
+  }
+  .bleed {
+    margin-inline: -1rem;
+  }
+}
+
+input,
+select,
+textarea {
+  color-scheme: dark;
+}
+
+/*
+  One focus ring, everywhere, and nothing switches it off. These rules sit outside Tailwind's
+  layers, so they beat any `outline-none` utility a call site reaches for.
+*/
+:focus-visible {
+  outline: 2px solid var(--color-proven);
+  outline-offset: 2px;
+}
+.field:focus-visible,
+.avatar:focus-visible {
+  outline-offset: 1px;
+}
+
+/* Keyboard entry to the page. Off screen until it takes focus. */
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  inset-inline-start: 0.5rem;
+  z-index: 100;
+  transform: translateY(-250%);
+  background: var(--color-panel-2);
+  border: 1px solid var(--color-line-bright);
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  color: var(--color-bright);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.skip-link:focus {
+  transform: none;
+}
+
+.field {
+  background: var(--color-ink);
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  color: var(--color-bright);
+  width: 100%;
+  transition: border-color 120ms ease;
+}
+.field:focus {
+  border-color: var(--color-line-bright);
+}
+
+.btn {
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    opacity 120ms ease;
+  cursor: pointer;
+}
+/*
+  A button that spans its column is a surface, not a control.
+
+  The radius rule is "curves only on things that always sit inside padding". This one does not:
+  it is as wide as the cards above it, so on a narrow screen its ends reach the viewport and a
+  10px corner shows a sliver of page background in each one — the same fault a rounded card has
+  at the edge. Square it and it reads as part of the stack rather than floating over it.
+*/
+.btn-block {
+  border-radius: 0;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background: var(--color-proven);
+  color: #04150d;
+}
+.btn-primary:hover:not(:disabled) {
+  background: #4bf49b;
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--color-line-bright);
+  color: var(--color-bright);
+}
+.btn-ghost:hover:not(:disabled) {
+  border-color: var(--color-dim);
+}
+
+/*
+  The header's utility controls, as one object.
+
+  Language, endpoints and help were three separate bordered pills in a wrapping row. Three
+  outlines for one job, and on a narrow screen they came apart at arbitrary points — the globe
+  left on one line, the help mark alone on the next. Grouped, they wrap as a unit, so the header
+  has three things to place instead of five, and the shared dividers cost a pixel each instead of
+  a border each.
+
+  The divider is the group's own background showing through a 1px gap, the same trick the board
+  rows use. No child owns an edge, so nothing doubles up where two of them meet.
+*/
+.hdr-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  background: var(--color-line);
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px var(--color-line);
+}
+.hdr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  height: 1.75rem;
+  padding-inline: 0.5rem;
+  background: var(--color-ink);
+  color: var(--color-dim);
+  cursor: pointer;
+  transition:
+    color 120ms ease,
+    background 120ms ease;
+}
+.hdr-btn:hover {
+  color: var(--color-bright);
+  background: var(--color-panel-2);
+}
+/*
+  Only the outer corners curve, and they curve logically — the first control is on the right in
+  Arabic. One of the three sits inside a positioning wrapper for its popover, so both the direct
+  child and the wrapped child are matched.
+*/
+.hdr-group > :first-child .hdr-btn,
+.hdr-group > .hdr-btn:first-child {
+  border-start-start-radius: 7px;
+  border-end-start-radius: 7px;
+}
+.hdr-group > :last-child .hdr-btn,
+.hdr-group > .hdr-btn:last-child {
+  border-start-end-radius: 7px;
+  border-end-end-radius: 7px;
+}
+
+/*
+  Menus and toggles, because native `select` and `checkbox` draw OS widgets that no CSS reaches.
+  Square, like every other surface that is not a button.
+*/
+.menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 14rem;
+  background: var(--color-panel-2);
+  box-shadow: 0 0 0 1px var(--color-line);
+  padding: 0.35rem 0.55rem;
+  color: var(--color-body);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.menu-btn:hover {
+  color: var(--color-bright);
+}
+.menu-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.menu-list {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 4px);
+  inset-inline-start: 0;
+  min-width: 100%;
+  max-height: 16rem;
+  overflow-y: auto;
+  background: var(--color-panel-2);
+  box-shadow:
+    0 0 0 1px var(--color-line),
+    0 12px 32px -8px rgb(0 0 0 / 0.7);
+}
+.menu-list-end {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}
+.menu-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  color: var(--color-body);
+  font-size: 0.75rem;
+  text-align: start;
+  white-space: nowrap;
+  cursor: pointer;
+}
+/* Icon and label travel together at the start; the hint keeps the end edge. */
+.menu-lead {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.menu-item:hover,
+.menu-item:focus-visible {
+  background: var(--color-line);
+  color: var(--color-bright);
+}
+.menu-item-on {
+  color: var(--color-proven);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-dim);
+  cursor: pointer;
+}
+.toggle:hover {
+  color: var(--color-body);
+}
+.toggle-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  background: var(--color-ink);
+  box-shadow: 0 0 0 1px var(--color-line-bright);
+  color: var(--color-ink);
+}
+.toggle-box-on {
+  background: var(--color-proven);
+  box-shadow: 0 0 0 1px var(--color-proven);
+}
+
+/* Token faces: fixed-size discs, so nothing reflows as logos arrive. */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  border: 1px solid var(--color-line);
+  background: var(--color-panel-2);
+  object-fit: cover;
+  overflow: hidden;
+  letter-spacing: 0;
+  user-select: none;
+}
+.avatar-stack {
+  display: inline-flex;
+  align-items: center;
+}
+/*
+  The second face laps the first. `margin-inline-start` rather than `margin-left`: the stack sits
+  in a row of text, so the token the pair sells is the one the reader meets first, and in Arabic
+  and Hebrew that is the right-hand disc. A physical margin put the overlap on the wrong disc and
+  pushed the pair a pixel out of its row.
+*/
+.avatar-stack > :last-child {
+  margin-inline-start: -6px;
+  box-shadow: 0 0 0 2px var(--color-panel);
+}
+
+/*
+  The executor table: one shared template so the header and every row line up.
+
+  The shares are set against the table's 800px floor, where every figure column now carries a
+  token's face beside its unit. At that width the rate column holds `ask 10,296.9` and a
+  two-face fraction on one line, in Arabic too: at 760px `الطلب` wrapped above the figure. The
+  edge column holds `-0.00001849` and its unit. The pair column gives up the room, because it
+  had it to spare: two faces, two five-letter symbols and an arrow are 154px.
+*/
+.board-grid {
+  display: grid;
+  grid-template-columns:
+    1.25rem minmax(0, 1.15fr) minmax(0, 1.1fr) minmax(0, 0.95fr) minmax(0, 1fr) 4rem;
+  column-gap: 0.75rem;
+  align-items: center;
+}
+
+/*
+  A row in a board table. A table runs the whole width of the viewport, so a row always meets both
+  edges: square, and no border. The row group paints the line colour and a 1px grid gap lets it
+  through, which rules the table without any row owning an edge of its own.
+*/
+.row {
+  background: var(--color-panel);
+  transition: background 120ms ease;
+}
+.row-pick {
+  cursor: pointer;
+}
+.row-pick:hover {
+  background: var(--color-panel-2);
+}
+/*
+  Selection reads as a filled bar down the leading edge. Painted, so it costs no layout width.
+
+  A gradient has no logical direction keyword, so the mirrored bar is a second rule under
+  `[dir='rtl']` rather than a `to inline-end`. The bar marks where a row begins, so it follows the
+  text: left in English, right in Arabic and Hebrew.
+*/
+.row-selected,
+.row-selected:hover {
+  background:
+    linear-gradient(to right, var(--color-proven) 0 3px, #0000 3px) no-repeat,
+    color-mix(in oklab, var(--color-proven) 7%, var(--color-panel));
+}
+[dir='rtl'] .row-selected,
+[dir='rtl'] .row-selected:hover {
+  background:
+    linear-gradient(to left, var(--color-proven) 0 3px, #0000 3px) no-repeat,
+    color-mix(in oklab, var(--color-proven) 7%, var(--color-panel));
+}
+
+/*
+  A sideways scroller must also be a containing block.
+
+  `sr-only` positions its text absolutely. Without `position: relative` here those spans resolve
+  against an ancestor further up, escape this box's clip, and drag the document's scrollable width
+  out to wherever the widest one sits — 752px at a 375px viewport, on the board. The page then
+  scrolls sideways even though every visible element is inside this scroller.
+*/
+.scroll-x {
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
+}
+
+/*
+  Square scrollbars, always on. The macOS overlay bar hides itself, so a reader cannot tell that a
+  table scrolls sideways until they try it.
+*/
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line-bright);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-dim);
+}
+
+/*
+  Reserve the gutter, on every scroller, whether or not the bar is showing.
+
+  Styling the bar is not enough on its own. A classic scrollbar takes layout space, so the moment
+  content grows past its container the bar appears, steals ten pixels, and everything under it
+  re-wraps — the board jumps as rows arrive. `stable` keeps that ten pixels reserved from the
+  start, so the bar arriving changes nothing.
+
+  It has to go on each scroller by name. The property only does anything on an element that is a
+  scroll container in that axis, so inheriting it from `html` would do nothing for the menu or a
+  wide table.
+*/
+html,
+.menu-list,
+.scroll-x {
+  scrollbar-gutter: stable;
+}
+
+/*
+  Firefox ignores `::-webkit-scrollbar` entirely, so without this it keeps the thin overlay bar
+  and none of the above applies to it.
+*/
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-bright) var(--color-ink);
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+.live-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/*
+  Reduced motion. The pulsing dot stops, the skeleton shimmer stops, and the landing page's
+  entrance stops. Everything lands on its final frame rather than disappearing.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .live-dot {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+  Letter-spacing is a Latin habit, and half our scripts do not survive it.
+
+  Twenty-seven labels carry `uppercase tracking-wider`. Arabic is cursive: space between letters
+  cuts the joins, so a word comes apart into unconnected shapes. Devanagari builds conjuncts from
+  stacked consonants, and a track pulls them into letters that spell something else. Thai writes
+  without word spaces, so any added track reads as a word break that is not there.
+
+  `lib/i18n.ts` decides, not this file. It reads the script off the active locale with
+  `Intl.Locale().maximize()` and sets `data-tracking`, so `fa`, `ur`, `bn` and `ta` are handled on
+  the day somebody adds them rather than the day somebody notices. An unknown script gets no
+  tracking, which is the safe half of the choice.
+
+  Tailwind v4 compiles `tracking-wider` to `letter-spacing: var(--tracking-wider)`, so zeroing the
+  token reaches every one of those labels without touching a call site. `.num` reads its own token
+  for the same reason: a negative track is small, and it still cuts a join.
+
+  `uppercase` needs no rule. None of the affected scripts has letter case, so it already does
+  nothing.
+*/
+:root {
+  --tracking-num: -0.01em;
+}
+:root[data-tracking='off'] {
+  --tracking-wider: 0;
+  --tracking-tight: 0;
+  --tracking-num: 0;
+}

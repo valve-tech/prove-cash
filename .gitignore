@@ -1,0 +1,70 @@
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+
+# Foundry
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+contracts/.gas-baseline
+# `forge snapshot` output. Not tracked, and deliberately: the one that was committed covered 96
+# of 523 tests, was written on the repository's first day, never updated, and nothing checked it.
+# The gas the product actually claims is `Gas.t.sol` plus `app/scripts/gen-gas.mjs --check`, which
+# names eleven paths and runs in CI.
+contracts/.gas-snapshot
+
+# A test writes this one record and removes it. `foundry.toml` gives it the only writable path
+# inside `deployments/`; if a run dies mid-test the file must not reach a commit, because a
+# record in that directory is what a deploy is checked against.
+contracts/deployments/424209.json
+
+# Written by `tools/src-fingerprint.py` at the start of a run and read back at the end, to
+# prove the Yul tool put the sources back. It describes one machine's run and one moment.
+contracts/.src-fingerprint
+
+# Written by `tools/run-ci.sh` when every job passes on a clean tree, holding the commit it
+# passed at. `.githooks/pre-push` reads it. Local by definition — it is a claim about this
+# machine's run, and committing one would let a stale claim travel.
+.ci-local-pass
+
+# Cloudflare
+.wrangler/
+
+# The solver's own opinion of which makers waste its gas. One bot's ledger, not shared state —
+# see sdk/src/solver/trust.ts. Deleting one costs an hour of relearning and nothing else.
+.solver-trust.*.json
+
+# Local
+.DS_Store
+*.local
+.env
+.env.*
+!.env.example
+.playwright-mcp/
+
+# Agent worktrees
+
+# forge coverage output
+lcov.info
+
+# Foundry coverage builds with a different optimiser setting, so it runs in its own out and
+# cache directories and cannot clobber the artifacts a test run is using.
+contracts/out-coverage/
+contracts/cache-coverage/
+
+# The running account of this work. Not part of the repo.
+progress.txt
+
+# Slither's machine-readable output. Regenerate it with the command at the top of
+# docs/slither-triage.md; the triage is the tracked artifact, the report is not.
+contracts/slither-report.json
+# Slither's own build, from `--foundry-out-directory out-slither`. It is a second full
+# compile of `contracts/src` and it is about 8 MB. The triage document's reproduce block
+# deletes and recreates both, so neither is ever worth keeping.
+contracts/out-slither/
+contracts/cache-slither/
+
+# Python bytecode from contracts/tools/*.py, written whenever CI or a human runs one.
+__pycache__/

@@ -1,0 +1,93 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+solc = "0.8.30"
+optimizer = true
+# 200, down from 1000. The fee-config change adds three take points, a reserved-fee ledger and a
+# callback `Terms` struct. `claim` and `announceFeeConfig` run in the linked `FeeClaimLib`
+# (delegatecall) and the settlement's `available` view moved to `ProveReader`; at 1000 the runtime
+# was 25,434 bytes. Now 23,427 (1,149 spare). Going below 200 buys under 100 more bytes, so 200
+# stays. `forge build --sizes` is the check; CI runs it and `FeeClaim.t.sol` asserts 1,000 spare.
+optimizer_runs = 200
+via_ir = true
+# Paris, not Shanghai: no PUSH0, so the bytecode runs on any EVM chain the registry might add
+# later without checking which hard forks that chain took.
+evm_version = "paris"
+# The deploy scripts read their addresses from config/<chainid>.json, and the test-token script
+# writes the addresses it deployed back to config/deployed.<chainid>.json.
+fs_permissions = [
+  { access = "read-write", path = "./config" },
+  # The periphery scripts hold the settlement an operator typed against the record of what is
+  # actually on this chain. Read-only: a deploy script must never edit the record it is checked
+  # against, or the check checks nothing.
+  { access = "read", path = "./deployments" },
+  # One name inside that directory, and only this one. `_requireRecordedSettlement` has a branch
+  # for "the file is here and the key is not", and no test can reach it while every record in the
+  # directory is complete. So `Deploy.t.sol` writes this one file, reads the refusal, and removes
+  # it. No chain has id 424209, and the read-only rule above still covers 369 and 943.
+  { access = "read-write", path = "./deployments/424209.json" },
+  # The exported ABIs, read-only. No test reads them now that the fee sink is gone (the settlement has
+  # no owner and no registration to prove immutable); the entry is kept so one can again. The ABI
+  # export check holds these files to the compiler.
+  { access = "read", path = "./abi" },
+  # The EIP-712 fixture the TypeScript tests assert against.
+  { access = "write", path = "../app/src/lib/__fixtures__" },
+]
+
+[fuzz]
+runs = 512
+
+[invariant]
+runs = 128
+# 256, not the 64 this started at. Eight actions and a 64-call chain is too short to reach an
+# ordering bug: the run ends before a deposit, a partial fill, a fee change and a withdrawal can
+# interleave. Measured on this suite — 64 costs 86s of CPU and 256 costs 553s. Neither depth
+# finds anything today, and a soak at 1024 finds nothing either, so this buys headroom against a
+# regression rather than a bug on the floor.
+depth = 256
+fail_on_revert = false
+call_override = false
+
+# The deep run, for the nightly job and for anyone changing the settlement's accounting:
+#
+#   FOUNDRY_PROFILE=soak forge test --match-path 'test/*Invariants*.t.sol'
+#
+# Same call budget as the default, spent on chains four times longer. Depth is what finds an
+# ordering bug; more runs only re-roll the same short sequence.
+[profile.soak.invariant]
+runs = 32
+depth = 1024
+fail_on_revert = false
+call_override = false
+
+# The fork suites, and the one setting they cannot share with the default profile:
+#
+#   FOUNDRY_PROFILE=fork PULSECHAIN_RPC=... forge test --match-path 'test/Fork*.t.sol'
+#
+# **`evm_version = "paris"` breaks a fork test that touches a modern mainnet contract**, and it
+# does it silently. Paris has no PUSH0, so forge reads `0x5f` as an undefined opcode: the frame
+# consumes every remaining unit of gas and reverts with no data. Measured on the x402PLSX wrapper
+# at block 27,260,000 — `underlying()` burns 1,040,431,565 gas and reverts under paris, and
+# answers PLSX in 24,905 gas under shanghai. The same `eth_call` on the node answers PLSX either
+# way, so nothing about the chain is wrong; the mismatch is entirely local.
+#
+# The paris pin stays on the default profile for the reason stated above it: our bytecode has to
+# run on any chain the registry might add. That reason says nothing about somebody else's
+# bytecode, which is all a fork test executes. PulseChain has PUSH0 — `app/scripts/check-opcodes.ts`
+# measures it on both chains — so shanghai here describes the chain rather than widening anything.
+[profile.fork]
+evm_version = "shanghai"
+# The valve gateway reads its key from an `X-API-Key` header and answers 401 without one. A key in
+# the URL path reaches access logs and every upstream hop, so the URL carries none. This is the
+# public demo key. `FOUNDRY_ETH_RPC_HEADERS='["X-API-Key: …"]'` replaces the list, and CI sets it
+# from `PROVE_CI_RPC_KEY`. An EMPTY `FOUNDRY_ETH_RPC_HEADERS` deletes the list (measured on 1.8.0),
+# so never export it blank. Forge sends this header to whatever `PULSECHAIN_RPC` names.
+eth_rpc_headers = ["X-API-Key: vk_demo"]
+
+[fmt]
+line_length = 100
+
+[rpc_endpoints]
+pulsechain = "${PULSECHAIN_RPC}"
+pulsechain_testnet = "${PULSECHAIN_TESTNET_RPC}"

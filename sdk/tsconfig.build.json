@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  // The test reads a fixture the Solidity suite writes into the app tree, which sits outside
+  // `rootDir`. Tests are not shipped, so the build simply leaves them out.
+  "exclude": ["src/**/*.test.ts"]
+}

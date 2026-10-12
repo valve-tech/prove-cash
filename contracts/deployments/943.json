@@ -1,0 +1,57 @@
+{
+  "_comment": "PulseChain testnet 943. Redeployed whole on 2026-10-06 from master cfd6e85 (fee-config-hash tree, MakerView feeOut/feeProceeds). FeeSink/registerFeeSink/settlement-owner are gone. Order: FeeClaimLib (CREATE2), ProveSettlement(stray,permit2), ProveExecutor, FeeDefaults+setDefaults+transferOwnership, ProveReader; then ProveBatchExecutor and RfqVenue with PROVE_SETTLEMENT_OFF_RECORD. FeeDefaults.acceptOwnership called from testnet admin 0x6fa7\u20266Acc (tx 0xd985e05d\u2026). INTENT_TYPEHASH is now 0xc1e92b74\u2026 (fee-config model). Domain separator moved with the verifying contract. Old intents against 0xdb3843\u2026 are unspendable.",
+  "_relayer": "Deployed by the settlement's own constructor, so the two bind immutably. It moved with this redeploy, which orphans every standing ERC-20 approval on the approval and permit rungs. A maker on the permit2 rung is unaffected: relayer.permit2() reads 0x000000000022D473030F116dDEE9F6B43aC78BA3.",
+  "_verify": "How to repeat the claim above: `cd contracts && node tools/verify-bytecode.mjs 943`. It reads this file, fetches eth_getCode for every address in `contracts`, and compares each one against the artifact forge build produced \u2014 reading the compiler's own immutableReferences rather than masking a guess, and printing each immutable's value with the record address it matches. Re-run on 2026-09-04 from a worktree at 9ff9265, the commit this record was written at: all eight matched instruction for instruction and every byte and nibble count above reproduced exactly. All eight metadata hashes differed, and that is a fact about the build rather than the program \u2014 solc hashes settings.remappings, and forge auto-detects those from whether lib/openzeppelin-contracts has its own submodules checked out and from the absolute path of the checkout. So the instruction bytes reproduce anywhere and the metadata hash reproduces only from an equivalent checkout at the same path. The tool exits 0 for identical, 3 for same program from a different build, and 1 for different code.",
+  "chainId": 943,
+  "deployedAt": "2026-10-06",
+  "deployer": "0xC3C6C6Cd76B018550EbF4F7Cb856Fd921dE2Ae21",
+  "owner": "0x6fa7d1016789A0C32fe74d5Bdd4393836C366Acc",
+  "_owner": "Owner of FeeDefaults only (acceptOwnership done). The settlement has no owner.",
+  "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+  "contracts": {
+    "FeeClaimLib": "0x0b169ac0be0a8062b2f839175fd2431744eb83f7",
+    "ProveSettlement": "0xa8B3f54c1435ea28437fA89A4192064F4bcCDA99",
+    "ProveRelayer": "0xa71FB9889a4F8069CaD38bf0F8449dEF93e59C21",
+    "ProveExecutor": "0x5711E4D1E18CFBaA288a61C59db9d7C923D12267",
+    "ProveCallSink": "0x2f0C704487FD0161ABA5E590e80D0c14bd7E3efF",
+    "FeeDefaults": "0x67e366de6E29289D43894F5587E29FE460405cFf",
+    "ProveReader": "0x8dCf4A7Fe697ba4705DF86A0D77084700C84cabD",
+    "ProveBatchExecutor": "0x65019500356831b7FDBbbE76fFB92e08a1a3E862",
+    "ProveBatchExecutorCallSink": "0x03B4417065F263e30f1c401a023D2E6d403F7004",
+    "RfqVenue": "0x48ebDd0770934799288ab826C439aa029B482896"
+  },
+  "strayConfig": {
+    "destinations": [
+      "0x7cD43983A963c62Add34694E83E896c5AfC3333f"
+    ],
+    "weights": [
+      "1000000000000000000"
+    ]
+  },
+  "transactions": {
+    "FeeClaimLib": "0x0275949117e226c436c63b0130343c4b3cade2d889c10f47f916791e723891a2",
+    "ProveSettlement": "0x2f8998abfbae4e367d80d502ec0483622b488dc3a92e747c3f08413293562e97",
+    "ProveExecutor": "0x07a5403e22919ce19a528674790c19cc1cde23dc66696bbe3c73893e27436f33",
+    "FeeDefaults": "0x29082b40f8f959783d20fd8ef6070a27279bdd01f136a1a8aa9d6e6919072236",
+    "FeeDefaults.setDefaults": "0x2ca9187660664e2bb04abdacdba3581421833474ef76cc574ae71bb4c9eb34f1",
+    "FeeDefaults.transferOwnership": "0xcae26d00fa603767793006d550b72fe87472cffa27b372668298cc1a4a8dee05",
+    "ProveReader": "0xff8deaf855ff77698b0388f8034fcac17b51c02759d6e23a409c719610ba4f25",
+    "ProveBatchExecutor": "0xa05ac1efa887a942c2ad8dbbb9e01e97b993ede79fe379b3ab85d012e441ec4f",
+    "RfqVenue": "0x9f6d054a22a4eaabdd69b175e76ff1460658f6dc65c29f395cff2f2b467e1282",
+    "FeeDefaults.acceptOwnership": "0xd985e05df93fccd38524e172d324e1468ca2d0b7c2c43d7f32f6ede5acd28c4a"
+  },
+  "blocks": {
+    "FeeClaimLib": 25576549,
+    "ProveSettlement": 25576550,
+    "ProveExecutor": 25576551,
+    "FeeDefaults": 25576552,
+    "FeeDefaults.setDefaults": 25576553,
+    "FeeDefaults.transferOwnership": 25576554,
+    "ProveReader": 25576555,
+    "ProveBatchExecutor": 25576582,
+    "RfqVenue": 25576586
+  },
+  "_superseded": "Replaces the 2026-10-01 FeeSink-era set at settlement 0xdb3843eFa19C06cA77e16c082BF33f7D4Dd1b8FC, relayer 0xBe5e6eA4A71f732b5C91Abb312e867293ee80a0e, executor 0x697B30A4e85098943f7DE901DE8475444FD573c0, call sink 0x7FF499494C7146F036e80Cd2dA0EDcF47F70a06A, FeeSink 0x625f6c74E70973254B4C65a2302b3214bf1aeB65, venue 0x2a4da6f7E5F046448cCa5Bf5691e431DA833dfff, batch executor 0x3a887c9631d7EF5Fc37ba08987150761db6DBeaD and its sink 0xd751fc7d8818B5bE53d837Fe7Cf7C954C2515724. That set replaced the 2026-09-29 set at settlement 0x5AF7aC9fD1C038247c7FE3979DFA4A632C359767, relayer 0x5DfA0Cd08a70Ad71841D8049d59c27B9b479bcD9, executor 0x122D4404a45914Cd6A75FC4D789A4c9110017Fc1, call sink 0xCc1130825e0E51EDF6795214F408F1dba962cE17, FeeSink 0xB5c4D164B43B34C16654499E245EadeAb1907FD0, venue 0x6B8DDB0b87ABCb7a65A0C8F4529aD093a07Ee14b, batch executor 0x196736ab1b4C8EFdCDEf5A5398B537874eaa1146 and its sink 0x3F5326439dE1d4d31eE49Bb1EB74792478282015. That set replaced the 2026-09-26 set at settlement 0xc172e58B3A60D66d5D8E73a2d6f5b5D9EAE09Da9, which replaced the 2026-09-09 set at settlement 0xe5f4F27219d56A4C38A480Ff1915f435B6cF5Ca2, which replaced the 2026-09-05 set at settlement 0x79B09eDf293f9ee7E1bb6067a29625B3e2a4861C. Point nothing at any of them. Every earlier set still has code on chain, including one that predates the callback hardening and one with the depositFor escrow theft.",
+  "_deploy": "`--with-gas-price`, never `--gas-price`. Broadcast via local proxy http://127.0.0.1:18543 that injects X-API-Key (forge script --rpc-url to the gateway omitted the header on eth_sendRawTransaction). Invocation: forge script <script> --rpc-url http://127.0.0.1:18543 --private-key <key> --broadcast --legacy --with-gas-price 2000000000 --slow. Periphery used PROVE_SETTLEMENT=PROVE_SETTLEMENT_OFF_RECORD=<settlement>.",
+  "_signatures": "INTENT_TYPEHASH is 0xc1e92b7403021c4d577a8f90119021b6820a2c5f1ff61c4ecaf337041f33e772 (fee-config model). Domain separator moved with the verifying contract. Wire codec is VERSION 5."
+}

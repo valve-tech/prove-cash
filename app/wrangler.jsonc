@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "prove-cash",
+  "compatibility_date": "2026-08-01",
+  // The site lives on its own domain. No workers.dev subdomain to register or leak.
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "prove.cash", "custom_domain": true },
+    { "pattern": "www.prove.cash", "custom_domain": true }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}

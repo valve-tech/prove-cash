@@ -1,0 +1,180 @@
+# The deep invariant run, on a schedule.
+#
+# The pull-request job runs the invariants at depth 256, which is as much CPU as a PR should
+# wait for. Depth is what finds an ordering bug, so the long chains have to run somewhere. They
+# run here, overnight, where nobody is waiting.
+name: soak
+
+on:
+  schedule:
+    # 04:00 UTC, daily.
+    - cron: "0 4 * * *"
+  # So a contributor who changes the settlement's accounting can ask for it before merging.
+  workflow_dispatch:
+
+jobs:
+  invariants:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      # Pinned to the version the gas ceilings were measured with. See ci.yml for why.
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.0
+
+      # 32 runs of 1024 calls: the same call budget the default profile spends, laid out in
+      # chains four times longer. See the `soak` profile in foundry.toml.
+      - name: Invariants, deep
+        run: FOUNDRY_PROFILE=soak forge test --match-path 'test/*Invariants*.t.sol' -vv
+        working-directory: contracts
+
+  # 22m49s of the pull-request job, measured, to re-prove a claim that only changes when somebody
+  # edits an `assembly` block. `--threads 1` is what makes it run at all: forge fans `solc` across
+  # every core, and the parallel via-IR builds killed the local runner three times on 16 GB. Held
+  # to one thread it peaks at 1.43 GB.
+  yul:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      # Pinned to the version the gas ceilings were measured with. See ci.yml for why.
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.0
+
+      - name: The Yul the coverage gate forgives is run by the suite
+        run: python3 tools/prove-yul-runs.py
+        working-directory: contracts
+        env:
+          FOUNDRY_THREADS: 1
+
+  # Slither ran in no workflow until 2026-09-09, and nothing regenerated its triage. The count
+  # went 73 to 81 to 84 across three runs a person happened to make in six days, and the document
+  # lagged every one of them. That is the control gap an audit firm leads with.
+  #
+  # The gate does not judge a finding. It proves every finding has a verdict somebody wrote, and
+  # it counts by DETECTOR rather than by line: `ProveSettlement.sol` grew 743 lines between two
+  # runs, which moved every citation in the triage while changing no finding. A gate keyed on
+  # lines would fail on every commit and teach people to ignore it.
+  #
+  # Nightly rather than per-pull-request because the run needs its own clean src-only build,
+  # which is a second full compile of `contracts/src`.
+  #
+  # Slither is PINNED. A version bump changes the detector set, so it should be a deliberate act
+  # with a re-read of the report, and the gate refuses a version the triage was not written
+  # against.
+  slither:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      # Pinned to the version the gas ceilings were measured with. See ci.yml for why.
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - name: Install Slither
+        run: python3 -m pip install 'slither-analyzer==0.9.6'
+
+      - name: Every static-analysis finding has a verdict
+        run: python3 tools/check-slither.py --run
+        working-directory: contracts
+
+  # `verify-bytecode.mjs` was written, worked, and was wired into nothing. Run by hand on
+  # 2026-09-09 it found testnet 943 running a settlement two commits behind master, with two
+  # shipped features absent from the chain the roadmap said carried them. Nothing else in this
+  # repository compares the source to a deployment, so it runs nightly now.
+  #
+  # It runs against 943 only. Mainnet 369 is deliberately older until #35, and the record says so,
+  # so a gate there would be permanently red about a fact already written down.
+  #
+  # It pins the verdict per contract rather than tolerating an exit code. The tool's three verdicts
+  # answer "does the chain match the tree today", and that stopped being a question this job could
+  # ask. Master has legitimately run ahead of 943 since 2026-09-16: three contracts there differ in
+  # code for reasons written down and accepted, so the plain exit code is 1 every night for a
+  # reason nobody intends to fix soon. `|| [ $? -eq 3 ]` cannot say that. A job that is red every
+  # morning is a job people stop reading, which is the argument the `opcodes` job below makes about
+  # false reds, and this repository has the matching disease in gates that could never go red.
+  #
+  # So the expected verdict is written down, per contract, in contracts/tools/bytecode-pin-943.json,
+  # with the reason beside it. This job passes only while every address still reports what somebody
+  # judged and dated. A redeploy, an edit to the deployment record, a contract that stops matching
+  # this tree, and a contract that starts matching it each turn it red. Re-pin by reading the run
+  # that broke, never by pasting over it.
+  #
+  # No `--rpc` on the command line: `ps` shows argv to every process on the runner, and the tool
+  # already carries the keyless gateway URL as its default. The key goes in an `X-API-Key` header,
+  # from `PROVE_RPC_KEY`. The expression gives `vk_demo` until `PROVE_CI_RPC_KEY` is set.
+  deployed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      # Pinned to the version the gas ceilings were measured with. See ci.yml for why.
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.8.0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Testnet 943 still reports the verdict somebody pinned
+        run: node tools/verify-bytecode.mjs 943 --pin
+        working-directory: contracts
+        env:
+          PROVE_RPC_KEY: ${{ secrets.PROVE_CI_RPC_KEY || 'vk_demo' }}
+
+  # Asks each registered chain which opcodes it takes, and fails when the answer stops matching
+  # what `contracts/foundry.toml` assumes.
+  #
+  # It lives here rather than in `ci.yml` for one reason: it talks to a chain. A network call in
+  # the pull-request job reddens a build for a reason that has nothing to do with the change, and
+  # a gate that fails for unrelated reasons is a gate people learn to ignore. Overnight, nobody
+  # is waiting, and a false red costs a re-run rather than somebody's afternoon.
+  #
+  # What it is for: `evm_version = "paris"` gives up `PUSH0` and `TSTORE` so the bytecode runs on
+  # any chain the registry might add. PulseChain will ship Cancun one day and nothing here would
+  # notice. This notices, on the first morning after.
+  opcodes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Install the SDK
+        run: npm ci
+        working-directory: sdk
+
+      - name: Build the SDK
+        run: npm run build
+        working-directory: sdk
+
+      - name: Install
+        run: npm ci
+        working-directory: app
+
+      - name: Every chain is where foundry.toml assumes
+        run: npm run check:opcodes
+        working-directory: app

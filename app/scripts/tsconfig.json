@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    // `prerender.ts` renders the landing page, so this project reaches into `src` and has to
+    // understand the components it finds there.
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true
+  },
+  "include": ["./**/*.ts"]
+}

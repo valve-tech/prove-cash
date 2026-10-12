@@ -1,0 +1,10 @@
+# Everything is public. The one thing a crawler needs from this file is the sitemap, which is
+# where the thirty-five language versions of the landing page name each other.
+#
+# /app is crawlable on purpose. It is the dapp shell — one URL, no server-rendered words, and a
+# canonical pointing at /. Blocking it here would leave the URL indexable with no content behind
+# it and no canonical to redirect the credit, which is the worse of the two outcomes.
+User-agent: *
+Allow: /
+
+Sitemap: https://prove.cash/sitemap.xml
