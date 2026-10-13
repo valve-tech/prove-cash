@@ -18,7 +18,7 @@
  * decay DOWNWARD, so what a maker is owed falls with time and a ring should get EASIER to close,
  * not harder. If waiting breaks the ring, that prediction is wrong and the reason matters.
  */
-import { formatUnits, parseAbi, parseEther } from 'viem'
+import { parseEther } from 'viem'
 import {
   CURVE_LINEAR,
   FLAG_PARTIAL,
@@ -70,10 +70,6 @@ const one = derive('prove.cash/lab/decay-one')
 const two = derive('prove.cash/lab/decay-two')
 const solver = derive('prove.cash/lab/decay-solver')
 
-const ERC20 = parseAbi([
-  'function approve(address spender, uint256 amount) returns (bool)',
-  'function allowance(address owner, address spender) view returns (uint256)',
-])
 
 head('setup')
 for (const [who, name] of [

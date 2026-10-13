@@ -9,7 +9,7 @@
  *
  * Reads only.
  */
-import { formatUnits, type Address } from 'viem'
+import { type Address } from 'viem'
 import { readFileSync } from 'node:fs'
 import { SETTLEMENT_ABI } from '@prove.cash/sdk/settlement'
 import { head, log, pub } from '../e2e/common.ts'
@@ -22,9 +22,6 @@ const deployed = JSON.parse(
   readFileSync('../contracts/config/deployed.943.json', 'utf8'),
 ) as Record<string, Address>
 const symbolOf = new Map(Object.entries(deployed).map(([s, a]) => [a.toLowerCase(), s] as const))
-const decimalsOf: Record<string, number> = {
-  tPLSX: 18, tUSDC: 6, tUSDT: 6, tHEX: 8, tWBTC: 8, tWETH: 18,
-}
 const name = (a: Address) => symbolOf.get(a.toLowerCase()) ?? `${a.slice(0, 8)}...`
 
 const tip = await pub.getBlockNumber()

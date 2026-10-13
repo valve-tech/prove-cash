@@ -11,7 +11,7 @@
  * one from disk at check time, one from a JSON import compiled in at build time.
  */
 
-import { keccak256, stringToHex, type Address, type Hex, type PublicClient } from 'viem'
+import { type Address, type Hex, type PublicClient } from 'viem'
 import { INTENT_TYPEHASH, SETTLEMENT_ABI, deployedOn, type ChainId } from '@prove.cash/sdk'
 import { SOLVER_BATCH_EXECUTOR_ABI } from '@prove.cash/sdk/solver'
 

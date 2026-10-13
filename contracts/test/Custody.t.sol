@@ -1087,9 +1087,9 @@ contract CustodyTest is Test {
         );
 
         // And it cannot be re-armed, by a stranger or by the maker.
-        address stranger = makeAddr("stranger");
-        tokenA.mint(stranger, AMOUNT_IN);
-        vm.startPrank(stranger);
+        address outsider = makeAddr("stranger");
+        tokenA.mint(outsider, AMOUNT_IN);
+        vm.startPrank(outsider);
         IERC20(i.tokenIn).approve(relayer, type(uint256).max);
         vm.expectRevert(ProveSettlement.IsCancelled.selector);
         settlement.deposit(i, AMOUNT_IN);

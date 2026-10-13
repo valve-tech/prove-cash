@@ -61,10 +61,7 @@ function claimedBalance(ProveSettlement settlement, address dest, address token)
 /// @notice The P3 (proceeds) rate an intent charges. The old single `rateOf` was this one in every
 ///         test that predates the three take points: those tests sign their rate there, because
 ///         it comes out of the number the maker signed, as the old fee did.
-function proceedsRate(ProveSettlement settlement, ProveSettlement.Intent memory i)
-    view
-    returns (uint256 r)
-{
+function proceedsRate(ProveSettlement, ProveSettlement.Intent memory i) pure returns (uint256 r) {
     (,, r) = ratesOf(i);
 }
 

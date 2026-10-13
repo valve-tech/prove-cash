@@ -430,7 +430,7 @@ contract ReturnBombTest is Test {
         (ok,) = address(settlement).call{gas: 3_000_000}(
             abi.encodeCall(settlement.fillBatch, (reqs, true, ANY_FEE))
         );
-        used = vm.lastCallGas().gasTotalUsed;
+        used = vm.lastFrameGas().gasTotalUsed;
     }
 
     function _intent(address who, address tokenIn, uint256 nonce)

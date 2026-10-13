@@ -247,12 +247,12 @@ contract DeployTest is Test {
         uint256[2] memory chains = [uint256(369), 943];
         for (uint256 k = 0; k < chains.length; k++) {
             string memory json = vm.readFile(_configPath(chains[k]));
-            assertTrue(!vm.keyExists(json, ".feeSinks"), "the sink registry is gone");
-            assertTrue(!vm.keyExists(json, ".defaultProceeds"), "so is the sweep destination");
-            assertTrue(!vm.keyExists(json, ".feeFloorRate"), "a floor nothing reads");
-            assertTrue(!vm.keyExists(json, ".protocolShare"), "a share nothing divides");
-            assertTrue(!vm.keyExists(json, ".burnToken"), "a token nothing burns");
-            assertTrue(!vm.keyExists(json, ".router"), "a router nothing trades at");
+            assertTrue(!vm.keyExistsJson(json, ".feeSinks"), "the sink registry is gone");
+            assertTrue(!vm.keyExistsJson(json, ".defaultProceeds"), "so is the sweep destination");
+            assertTrue(!vm.keyExistsJson(json, ".feeFloorRate"), "a floor nothing reads");
+            assertTrue(!vm.keyExistsJson(json, ".protocolShare"), "a share nothing divides");
+            assertTrue(!vm.keyExistsJson(json, ".burnToken"), "a token nothing burns");
+            assertTrue(!vm.keyExistsJson(json, ".router"), "a router nothing trades at");
         }
     }
 
@@ -957,7 +957,7 @@ contract DeployTest is Test {
         );
     }
 
-    function _validFeeConfigs(uint256 chainId) internal view returns (string memory) {
+    function _validFeeConfigs(uint256 chainId) internal pure returns (string memory) {
         return string.concat(
             '{"',
             vm.toString(chainId),

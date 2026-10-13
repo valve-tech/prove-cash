@@ -11,7 +11,7 @@
  * Same funds, same tokens, same amounts as the two-maker run. The only thing that changes is who
  * signs, which is what makes it an experiment rather than a demonstration.
  */
-import { formatUnits, parseAbi, parseEther } from 'viem'
+import { parseEther } from 'viem'
 import {
   CURVE_LINEAR,
   FLAG_PARTIAL,
@@ -64,10 +64,6 @@ const one = derive('prove.cash/lab/same-maker')
 const two = one
 const solver = derive('prove.cash/lab/same-solver')
 
-const ERC20 = parseAbi([
-  'function approve(address spender, uint256 amount) returns (bool)',
-  'function allowance(address owner, address spender) view returns (uint256)',
-])
 
 head('setup')
 for (const [who, name] of [

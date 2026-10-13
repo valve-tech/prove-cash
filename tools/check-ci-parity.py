@@ -17,7 +17,8 @@ repository came to point at a line that had moved.
 
 What it deliberately ignores, and why:
 
-  `uses:` steps      `actions/checkout`, `actions/setup-node`, `foundry-rs/foundry-toolchain`.
+  `uses:` steps      `actions/cache`, `actions/checkout`, `actions/setup-node`,
+                     `foundry-rs/foundry-toolchain`.
                      They set up a runner. This machine is set up already.
   `env:` on a step   `PULSECHAIN_RPC` comes from a repository secret; locally it comes from the
                      shell or the fork tests skip themselves, which is what they are built to do.
@@ -47,6 +48,7 @@ GITLAB_SETUP = ("export ", "unset ", "npm config set cache ")
 # `uses:` values that are runner setup rather than a command. A `uses:` outside this set is a
 # real step somebody added, and the checker stops rather than guessing what it does.
 SETUP_ACTIONS = {
+    "actions/cache",
     "actions/checkout",
     "actions/setup-node",
     "foundry-rs/foundry-toolchain",

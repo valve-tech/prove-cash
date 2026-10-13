@@ -89,7 +89,7 @@ contract EdgesTest is Test {
      * A maker could reach both by filling in a form. Refusing the terms turns a delivery nobody
      * can retrieve into a signature that never settles.
      */
-    function test_AnIntentPayingAnAddressItCannotLeaveIsRefused() public {
+    function test_AnIntentPayingAnAddressItCannotLeaveIsRefused() public view {
         address[2] memory oneWay = [address(settlement), settlement.relayer()];
 
         for (uint256 k = 0; k < oneWay.length; k++) {

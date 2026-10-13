@@ -11,6 +11,9 @@ concurrency:
 
 jobs:
   contracts:
+    # A Dependabot npm bump touches no Solidity, so the fork suite, coverage and the gas gates
+    # cannot change on it. The sdk and app jobs still run in full. Action bumps still run this.
+    if: ${{ !(github.event_name == 'pull_request' && startsWith(github.head_ref, 'dependabot/npm_and_yarn/')) }}
     runs-on: ubuntu-latest
     steps:
       # `fetch-depth: 0` because `check-gas-figures.py` subtracts the gas table's history from
@@ -32,6 +35,19 @@ jobs:
       - uses: foundry-rs/foundry-toolchain@v1
         with:
           version: v1.8.0
+          cache: true
+
+      # Forge's own build cache. Forge re-checks every source by content hash, so a stale entry
+      # only costs a rebuild; it can never hand back bytecode for a source that changed. The
+      # bytecode pin and the coverage gate still read whatever this run compiles.
+      - uses: actions/cache@v4
+        with:
+          path: |
+            contracts/out
+            contracts/cache
+          key: forge-v1.8.0-${{ hashFiles('contracts/foundry.toml', '.gitmodules', 'contracts/src/**/*.sol', 'contracts/test/**/*.sol', 'contracts/script/**/*.sol') }}
+          restore-keys: |
+            forge-v1.8.0-
 
       # Formatting was unchecked until 2026-09-09 and 43 files had drifted. Nobody ran the
       # formatter because a run of it moves most lines in `contracts/`, which rots the line
@@ -224,6 +240,19 @@ jobs:
       - uses: foundry-rs/foundry-toolchain@v1
         with:
           version: v1.8.0
+          cache: true
+
+      # Forge's own build cache. Forge re-checks every source by content hash, so a stale entry
+      # only costs a rebuild; it can never hand back bytecode for a source that changed. The
+      # bytecode pin and the coverage gate still read whatever this run compiles.
+      - uses: actions/cache@v4
+        with:
+          path: |
+            contracts/out
+            contracts/cache
+          key: forge-v1.8.0-${{ hashFiles('contracts/foundry.toml', '.gitmodules', 'contracts/src/**/*.sol', 'contracts/test/**/*.sol', 'contracts/script/**/*.sol') }}
+          restore-keys: |
+            forge-v1.8.0-
 
       # The ABI check reads what the compiler produced, so the contracts have to be built.
       - name: Build contracts
@@ -289,6 +318,19 @@ jobs:
       - uses: foundry-rs/foundry-toolchain@v1
         with:
           version: v1.8.0
+          cache: true
+
+      # Forge's own build cache. Forge re-checks every source by content hash, so a stale entry
+      # only costs a rebuild; it can never hand back bytecode for a source that changed. The
+      # bytecode pin and the coverage gate still read whatever this run compiles.
+      - uses: actions/cache@v4
+        with:
+          path: |
+            contracts/out
+            contracts/cache
+          key: forge-v1.8.0-${{ hashFiles('contracts/foundry.toml', '.gitmodules', 'contracts/src/**/*.sol', 'contracts/test/**/*.sol', 'contracts/script/**/*.sol') }}
+          restore-keys: |
+            forge-v1.8.0-
 
       - name: Build contracts
         run: forge build

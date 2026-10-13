@@ -232,6 +232,7 @@ def main():
         run_coverage(lcov)
 
     failures, forgiven, used = [], [], set()
+    yul_forgiven: dict[str, list[int]] = {}
     for path, found in sorted(parse(lcov).items()):
         if not (path.startswith("src/") or path.startswith("script/")):
             continue
@@ -242,13 +243,7 @@ def main():
             if n in yul:
                 # Name the control. A reader who sees a forgiven line needs to know what stands
                 # in for the counter, and that it runs overnight rather than on this push.
-                forgiven.append(
-                    f"{path}:{n}  {text}\n"
-                    "        Yul: forge counts no assembly statement anywhere here. The control "
-                    "is tools/prove-yul-runs.py,\n        which breaks this block on purpose and "
-                    "counts the tests that fail. It runs in the `yul` job\n        of "
-                    ".github/workflows/soak.yml — nightly at 04:00 UTC, not on this push."
-                )
+                yul_forgiven.setdefault(path, []).append(n)
             else:
                 failures.append(f"{path}:{n}  {text}")
         for n in sorted(set(found["branches"])):
@@ -273,10 +268,20 @@ def main():
         )
 
     print()
-    if forgiven:
-        print(f"{len(forgiven)} item(s) forge cannot count, each with the reason:")
-        for f in forgiven:
-            print(f"    {f}")
+    n_yul = sum(len(v) for v in yul_forgiven.values())
+    if n_yul or forgiven:
+        print(f"{n_yul + len(forgiven)} item(s) forge cannot count:")
+    if n_yul:
+        print(
+            f"  {n_yul} Yul line(s). Forge counts no assembly statement. The control is\n"
+            "  tools/prove-yul-runs.py, which breaks each block on purpose and counts the tests\n"
+            "  that fail. It runs in the `yul` job of .github/workflows/soak.yml, nightly at\n"
+            "  04:00 UTC, not on this push."
+        )
+        for path in sorted(yul_forgiven):
+            print(f"    {path}: {', '.join(str(n) for n in yul_forgiven[path])}")
+    for f in forgiven:
+        print(f"    {f}")
     if failures:
         print(f"\nFAIL: {len(failures)} uncovered item(s) with no such excuse:")
         for f in failures:

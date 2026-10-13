@@ -619,7 +619,7 @@ contract TokenMatrixTest is Test {
      * at ten basis points on these amounts it divides exactly, so the direction is stated here
      * and pinned by `test/Fuzz.t.sol` rather than by this matrix.
      */
-    function _expect(Cell memory c, uint256 take) private view returns (Expect memory e) {
+    function _expect(Cell memory c, uint256 take) private pure returns (Expect memory e) {
         uint256 unit = 10 ** c.dec;
         e.gross = _ceil(take * (100 * unit), 1_000 * unit);
         e.fee = (e.gross * FEE_RATE) / FEE_WAD;

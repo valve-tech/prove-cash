@@ -488,8 +488,8 @@ contract FaucetTokenTest is Test {
             )
         );
 
-        address stranger = makeAddr("relayer-stranger");
-        vm.prank(stranger);
+        address outsider = makeAddr("relayer-stranger");
+        vm.prank(outsider);
         vm.expectRevert(FaucetToken.BadSignature.selector);
         tokenIn.transferWithAuthorization(
             maker, address(settlement), AMOUNT_IN, a.validAfter, a.validBefore, h, av, ar, as_

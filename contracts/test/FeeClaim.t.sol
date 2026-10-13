@@ -516,7 +516,7 @@ contract FeeClaimTest is Test {
     ///      trailer holds a hash of the build's metadata, which moves with the checkout's path, so
     ///      scanning it failed this test in one worktree and passed it in another (an `0xf4` in the
     ///      IPFS hash, 12 bytes past the last instruction, on 2026-10-05). It is not code.
-    function test_TheLibraryHasNoSelfdestructAndNoDelegatecall() public {
+    function test_TheLibraryHasNoSelfdestructAndNoDelegatecall() public view {
         address lib = _libraryAddress();
         bytes memory code = lib.code;
         assertGt(code.length, 2);

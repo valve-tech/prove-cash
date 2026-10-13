@@ -69,7 +69,6 @@ const RING = [
   { t: token('tWBTC'), sells: '0.00002', wants: '97' },
 ] as const
 
-const ERC20 = parseAbi(['function approve(address spender, uint256 amount) returns (bool)'])
 const approveData = (spender: `0x${string}`) =>
   `0x095ea7b3${spender.slice(2).toLowerCase().padStart(64, '0')}${'f'.repeat(64)}` as `0x${string}`
 
