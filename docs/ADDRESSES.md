@@ -267,6 +267,47 @@ address rather than a boolean on purpose: typing it into a second variable is a
 deliberate act, and a flag left in a shell cannot wave through tomorrow's
 different address.
 
+## Explorer verification
+
+Status as of 2026-10-13 11:15 CT, read only from each service's own API: Sourcify
+`GET https://sourcify.dev/server/v2/contract/{chainId}/{address}` and Blockscout v2
+`GET /api/v2/smart-contracts/{address}` (`is_verified`, `is_partially_verified`). Build
+settings for every submission: solc 0.8.30, optimizer 200 runs, `via_ir`, EVM `paris`,
+`FeeClaimLib` linked at `0x0b169aC0Be0a8062b2f839175Fd2431744Eb83f7`, constructor arguments
+explicit. Verification sends no transaction.
+
+**A partial match means the code matches and only the solc metadata hash differs.** That hash
+covers remappings and the checkout path, which is why it differs ("Checking what is on chain"
+below explains it). Nothing executable differs.
+
+| Contract | 369 address | 369 Sourcify | 369 Blockscout | 943 Blockscout |
+| --- | --- | --- | --- | --- |
+| FeeClaimLib | `0x0b169aC0Be0a8062b2f839175Fd2431744Eb83f7` | [Sourcify: partial match](https://repo.sourcify.dev/369/0x0b169aC0Be0a8062b2f839175Fd2431744Eb83f7) | [Blockscout: not verified](https://scan.pulsechain.com/#/address/0x0b169aC0Be0a8062b2f839175Fd2431744Eb83f7) | [Blockscout: not verified](https://scan.v4.testnet.pulsechain.com/#/address/0x0b169ac0be0a8062b2f839175fd2431744eb83f7) |
+| ProveSettlement | `0x5EB7cAf15f9Fa7Afad9a45d035f7E0F67140fC7b` | [Sourcify: partial match](https://repo.sourcify.dev/369/0x5EB7cAf15f9Fa7Afad9a45d035f7E0F67140fC7b) | [Blockscout: not verified](https://scan.pulsechain.com/#/address/0x5EB7cAf15f9Fa7Afad9a45d035f7E0F67140fC7b) | [Blockscout: not verified](https://scan.v4.testnet.pulsechain.com/#/address/0xa8B3f54c1435ea28437fA89A4192064F4bcCDA99) |
+| ProveRelayer | `0xAc792BBDd72Ce4177Cf1FAD1719d7B68b598268b` | [Sourcify: partial match](https://repo.sourcify.dev/369/0xAc792BBDd72Ce4177Cf1FAD1719d7B68b598268b) | [Blockscout: not verified](https://scan.pulsechain.com/#/address/0xAc792BBDd72Ce4177Cf1FAD1719d7B68b598268b) | [Blockscout: not verified](https://scan.v4.testnet.pulsechain.com/#/address/0xa71FB9889a4F8069CaD38bf0F8449dEF93e59C21) |
+| ProveExecutor | `0x2746b99Cd4b8E35539592Be0895B7A5652b04AD7` | [Sourcify: partial match](https://repo.sourcify.dev/369/0x2746b99Cd4b8E35539592Be0895B7A5652b04AD7) | [Blockscout: not verified](https://scan.pulsechain.com/#/address/0x2746b99Cd4b8E35539592Be0895B7A5652b04AD7) | [Blockscout: not verified](https://scan.v4.testnet.pulsechain.com/#/address/0x5711E4D1E18CFBaA288a61C59db9d7C923D12267) |
+| ProveCallSink | `0x1a3A59699BE7D908e1460cdAD83cfBd6b9Be4375` | [Sourcify: partial match](https://repo.sourcify.dev/369/0x1a3A59699BE7D908e1460cdAD83cfBd6b9Be4375) | [Blockscout: not verified](https://scan.pulsechain.com/#/address/0x1a3A59699BE7D908e1460cdAD83cfBd6b9Be4375) | [Blockscout: not verified](https://scan.v4.testnet.pulsechain.com/#/address/0x2f0C704487FD0161ABA5E590e80D0c14bd7E3efF) |
+| FeeDefaults | `0xE92cB6265497F141125E25a9B5231370632e878E` | [Sourcify: partial match](https://repo.sourcify.dev/369/0xE92cB6265497F141125E25a9B5231370632e878E) | [Blockscout: partial match](https://scan.pulsechain.com/#/address/0xE92cB6265497F141125E25a9B5231370632e878E) | [Blockscout: partial match](https://scan.v4.testnet.pulsechain.com/#/address/0x67e366de6E29289D43894F5587E29FE460405cFf) |
+| ProveReader | `0x8c93958085e4823983b2B811F206874C108C5288` | [Sourcify: partial match](https://repo.sourcify.dev/369/0x8c93958085e4823983b2B811F206874C108C5288) | [Blockscout: not verified](https://scan.pulsechain.com/#/address/0x8c93958085e4823983b2B811F206874C108C5288) | [Blockscout: not verified](https://scan.v4.testnet.pulsechain.com/#/address/0x8dCf4A7Fe697ba4705DF86A0D77084700C84cabD) |
+| ProveBatchExecutor | `0xE0925126C969E362195efdbF1f57d1DdF243781c` | [Sourcify: partial match](https://repo.sourcify.dev/369/0xE0925126C969E362195efdbF1f57d1DdF243781c) | [Blockscout: not verified](https://scan.pulsechain.com/#/address/0xE0925126C969E362195efdbF1f57d1DdF243781c) | [Blockscout: not verified](https://scan.v4.testnet.pulsechain.com/#/address/0x65019500356831b7FDBbbE76fFB92e08a1a3E862) |
+| ProveBatchExecutorCallSink | `0xBC60540D280e34f7De43F71dB6b1a9397CF44d37` | [Sourcify: partial match](https://repo.sourcify.dev/369/0xBC60540D280e34f7De43F71dB6b1a9397CF44d37) | [Blockscout: not verified](https://scan.pulsechain.com/#/address/0xBC60540D280e34f7De43F71dB6b1a9397CF44d37) | [Blockscout: not verified](https://scan.v4.testnet.pulsechain.com/#/address/0x03B4417065F263e30f1c401a023D2E6d403F7004) |
+| RfqVenue | `0x6E94A88973f7D1cDcd59A5B0ef21C84eBdA09F04` | [Sourcify: partial match](https://repo.sourcify.dev/369/0x6E94A88973f7D1cDcd59A5B0ef21C84eBdA09F04) | [Blockscout: not verified](https://scan.pulsechain.com/#/address/0x6E94A88973f7D1cDcd59A5B0ef21C84eBdA09F04) | [Blockscout: not verified](https://scan.v4.testnet.pulsechain.com/#/address/0x48ebDd0770934799288ab826C439aa029B482896) |
+
+- **Sourcify, 369:** all ten are a partial match on both runtime and creation code, submitted
+  through `POST /v2/verify/369/{address}` with forge's standard JSON input.
+- **Sourcify, 943:** not possible. Sourcify's `/chains` does not list chain 943.
+- **Blockscout:** every contract was submitted through the Etherscan-style API
+  (`https://api.scan.pulsechain.com/api/`, `https://api.scan.v4.testnet.pulsechain.com/api/`)
+  and through `POST /api/v2/smart-contracts/{address}/verification/via/standard-input`. Only
+  `FeeDefaults` came back, a partial match on both chains. The 369 Etherscan-style jobs stay in
+  `Pending in queue`, the 943 status endpoint answers `Unknown UID`, and the v2 endpoint answers
+  `200 Smart-contract verification started` and reports nothing further. Resubmit later.
+
+Explorer verification is a convenience for readers. The checks this repository relies on are
+`contracts/tools/verify-bytecode.mjs` (below) and `contracts/test/Live369.t.sol`, which builds every
+369 contract fresh on a fork and compares it to the live code with only immutables, link slots and
+the metadata trailer masked, then checks the wiring and the `FeeDefaults` owner and defaults.
+
 ## Checking what is on chain against what we build
 
 `contracts/tools/verify-bytecode.mjs` repeats the comparison both records below

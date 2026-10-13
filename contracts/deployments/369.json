@@ -1,5 +1,6 @@
 {
   "_comment": "PulseChain mainnet 369. Redeployed whole on 2026-10-06 from master 0f20643 / cfd6e85 tree (fee-config-hash). FeeSink/registerFeeSink/settlement-owner gone. FeeDefaults.acceptOwnership from 0x5182\u20262E2 (tx 0x3a6ca8cc\u2026). INTENT_TYPEHASH 0xc1e92b74\u2026. DO NOT use the old settlement's owner key against the superseded set for feeTo=0 principal; that set is abandoned.",
+  "_verification": "Explorer verification, 2026-10-13 11:15 CT (solc 0.8.30, optimizer 200, via_ir, paris, FeeClaimLib linked at 0x0b169aC0Be0a8062b2f839175Fd2431744Eb83f7). Sourcify (https://repo.sourcify.dev/369/<address>): all ten contracts are a partial match (code matches, metadata hash differs). Blockscout v2: FeeDefaults is a partial match; the other nine are not verified (submitted, never processed). See docs/ADDRESSES.md, 'Explorer verification'.",
   "_relayer": "Deployed by the settlement constructor. Approvals on the old relayer are orphaned; permit2 rung keeps Permit2 approvals.",
   "chainId": 369,
   "deployedAt": "2026-10-06",

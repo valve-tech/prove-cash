@@ -4,7 +4,6 @@ import type { Address, Hex } from 'viem'
 import {
   CURVE_LINEAR,
   DEFAULT_CHAIN,
-  ZERO,
   ZERO_HASH,
   intentHashOf,
   type Exclusive,

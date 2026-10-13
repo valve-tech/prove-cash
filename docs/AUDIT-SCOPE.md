@@ -2158,3 +2158,26 @@ than that they vanished.
 | "An offer that names no destination charges nothing" | earlier editions of this document, section 1 | A zero `feeConfig` charges nothing, and a rate above zero with `feeConfig = 0` is `BadTerms_` since 2026-10-03 (`_termsOk`) |
 | "None of the three is built", of the two token allowlists and the destination `whitelist` | earlier editions of this document, 6.7 | The destination list is built, on chain, as the fee-sink registry. The two token allowlists are still not built |
 | 32 line citations into `contracts/src` and `contracts/test` | earlier editions of this document, sections 1, 4, 5, 6, 7 and 8 | Each pointed near what it named, not at it: a test cited a few lines above its declaration, an invariant cited at a neighbour's line, and `claim` cited sixty-four lines above its declaration. `check-citations.py` passed all of them, because it pools the candidate words of a whole paragraph or table row. Re-aimed on 2026-09-23 to the declaration each one names |
+
+### 6.12 The `FeeDefaults` owner is a single EOA, accepted for now
+
+**Status: known and accepted by the owner on 2026-10-13. Not a finding to re-raise; review it as
+a disclosed risk.**
+
+`FeeDefaults` on 369 (`0xE92cB6265497F141125E25a9B5231370632e878E`) is owned by one externally
+owned account, `0x5182574eE268ABD0A48f97DcfcdE65234E8422E2`, with no handover pending
+(`pendingOwner == 0`). There is no multisig and no timelock in front of `setDefaults`.
+
+What a stolen or misused key can do is bounded by section 4: it can append a new default entry
+(a fee config plus the P1 handover rate, the P2 output rate, the P3 proceeds rate, and a warn
+rate for each). It cannot touch the settlement, any book, any escrow, or any intent already
+signed; the settlement never reads `FeeDefaults`. The exposure is to makers who sign **after**
+a change and accept the default P1/P2/P3 rates without reading them.
+
+**Plan.** Once the project's valuation reaches a threshold the owner will set, ownership moves to
+a timelocked multisig through the contract's existing two-step handover: the current owner calls
+`transferOwnership(multisig)`, and the multisig (through its timelock) calls `acceptOwnership`.
+No contract change is needed and nothing else moves; until the second step lands, the EOA stays
+owner and `pendingOwner` names the multisig. `test_OwnershipMovesInTwoSteps` covers the
+mechanism, and `test/Live369.t.sol` will fail on the owner assertion when the handover happens,
+which is the prompt to update this section.

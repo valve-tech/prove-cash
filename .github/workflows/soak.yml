@@ -38,7 +38,9 @@ jobs:
   # to one thread it peaks at 1.43 GB.
   yul:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    # 60 was too short on a GitHub-hosted runner: the first run there (2026-10-13) was cancelled
+    # at the limit. One-thread via-IR builds of every target are slow on those runners.
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v7
         with:

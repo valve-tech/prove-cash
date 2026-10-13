@@ -31,6 +31,8 @@ fs_permissions = [
   # no owner and no registration to prove immutable); the entry is kept so one can again. The ABI
   # export check holds these files to the compiler.
   { access = "read", path = "./abi" },
+  # Build artifacts, read-only: `Live369.t.sol` reads immutable and link offsets from them.
+  { access = "read", path = "./out" },
   # The EIP-712 fixture the TypeScript tests assert against.
   { access = "write", path = "../app/src/lib/__fixtures__" },
 ]

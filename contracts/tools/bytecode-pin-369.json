@@ -4,73 +4,73 @@
   "contracts": {
     "FeeClaimLib": {
       "address": "0x0b169aC0Be0a8062b2f839175Fd2431744Eb83f7",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 3229,
       "onChainSha256": "72e2be9d3d8942cbce4024e7195224b8cc78020bc570ffeac811d661d18d69c4",
-      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on this checkout."
+      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on the original development checkout. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveSettlement": {
       "address": "0x5EB7cAf15f9Fa7Afad9a45d035f7E0F67140fC7b",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 23427,
       "onChainSha256": "5f3bf70ef7d09de030e36353898bbddfbe26edfa8813a5fbf8916915ea54037a",
-      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on this checkout."
+      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on the original development checkout. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveRelayer": {
       "address": "0xAc792BBDd72Ce4177Cf1FAD1719d7B68b598268b",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 1053,
       "onChainSha256": "16cb96dcc73ad4bd9b06d9b746667f7bf0c89196d86780363acd266a5be86700",
-      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on this checkout."
+      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on the original development checkout. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveExecutor": {
       "address": "0x2746b99Cd4b8E35539592Be0895B7A5652b04AD7",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 5156,
       "onChainSha256": "f99e6a1167acaa732d49434693e03f5ad599efb4b8a3f8012bc930915d44f9de",
-      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on this checkout."
+      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on the original development checkout. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveCallSink": {
       "address": "0x1a3A59699BE7D908e1460cdAD83cfBd6b9Be4375",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 1868,
       "onChainSha256": "3e54f3f6b7116b929ac49c906dc696c868f2cdc84f0c63188575e63fbee60929",
-      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on this checkout."
+      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on the original development checkout. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "FeeDefaults": {
       "address": "0xE92cB6265497F141125E25a9B5231370632e878E",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 6399,
       "onChainSha256": "e12e42683cb65711b0bed32db36a7e7909e89171317c520a9414ae6d0255063a",
-      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on this checkout."
+      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on the original development checkout. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveReader": {
       "address": "0x8c93958085e4823983b2B811F206874C108C5288",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 22203,
       "onChainSha256": "6fcc019fb39524b8bb231c9021ed0af8ae8b7edea353acabceef41b5ffda7668",
-      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on this checkout."
+      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on the original development checkout. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveBatchExecutor": {
       "address": "0xE0925126C969E362195efdbF1f57d1DdF243781c",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 8778,
       "onChainSha256": "835f201f74c7dc93f1b9f73c8e7b3be7619ec3a0a738710ae0d2af9d156c4d67",
-      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on this checkout."
+      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on the original development checkout. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveBatchExecutorCallSink": {
       "address": "0xBC60540D280e34f7De43F71dB6b1a9397CF44d37",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 1868,
       "onChainSha256": "c2d2837072b50312f045943a8e9397bc1c0b9735824e4252d60b4d9331c89edc",
-      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on this checkout."
+      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on the original development checkout. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "RfqVenue": {
       "address": "0x6E94A88973f7D1cDcd59A5B0ef21C84eBdA09F04",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 5460,
       "onChainSha256": "17efa9ecc3610cd6627bb420b0c7a9256f76653b41ed82814d44e822b9613c67",
-      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on this checkout."
+      "why": "Redeploy 2026-10-06 fee-config tree. Verified identical on the original development checkout. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     }
   }
 }

@@ -4,73 +4,73 @@
   "contracts": {
     "FeeClaimLib": {
       "address": "0x0b169ac0be0a8062b2f839175fd2431744eb83f7",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 3229,
       "onChainSha256": "72e2be9d3d8942cbce4024e7195224b8cc78020bc570ffeac811d661d18d69c4",
-      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on this checkout against eth_getCode via the valve gateway."
+      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on the original development checkout against eth_getCode via the valve gateway. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveSettlement": {
       "address": "0xa8B3f54c1435ea28437fA89A4192064F4bcCDA99",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 23427,
       "onChainSha256": "ca0e8039a3c6bbc13047effc74eaaf45f8f028660b1cc03926328100d15be8b8",
-      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on this checkout against eth_getCode via the valve gateway."
+      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on the original development checkout against eth_getCode via the valve gateway. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveRelayer": {
       "address": "0xa71FB9889a4F8069CaD38bf0F8449dEF93e59C21",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 1053,
       "onChainSha256": "6bae93c93fadeda63c0bdc5b8febf17a58c7dc03dd8f7f5f963427cd105ca7ba",
-      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on this checkout against eth_getCode via the valve gateway."
+      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on the original development checkout against eth_getCode via the valve gateway. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveExecutor": {
       "address": "0x5711E4D1E18CFBaA288a61C59db9d7C923D12267",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 5156,
       "onChainSha256": "c312d333e1f7f869d59131402385cb861afeb49a9b83bd45b5dfbff9050e1fb9",
-      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on this checkout against eth_getCode via the valve gateway."
+      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on the original development checkout against eth_getCode via the valve gateway. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveCallSink": {
       "address": "0x2f0C704487FD0161ABA5E590e80D0c14bd7E3efF",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 1868,
       "onChainSha256": "c46e7ba34db02fc863e6568d345c6a2852b3cc0c55095b6c1528c9f9edf90b55",
-      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on this checkout against eth_getCode via the valve gateway."
+      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on the original development checkout against eth_getCode via the valve gateway. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "FeeDefaults": {
       "address": "0x67e366de6E29289D43894F5587E29FE460405cFf",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 6399,
       "onChainSha256": "e12e42683cb65711b0bed32db36a7e7909e89171317c520a9414ae6d0255063a",
-      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on this checkout against eth_getCode via the valve gateway."
+      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on the original development checkout against eth_getCode via the valve gateway. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveReader": {
       "address": "0x8dCf4A7Fe697ba4705DF86A0D77084700C84cabD",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 22203,
       "onChainSha256": "77014d29f630dc19faccc4eacdb4053de8e41ff6be3ff1279513ce3d90402147",
-      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on this checkout against eth_getCode via the valve gateway."
+      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on the original development checkout against eth_getCode via the valve gateway. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveBatchExecutor": {
       "address": "0x65019500356831b7FDBbbE76fFB92e08a1a3E862",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 8778,
       "onChainSha256": "80b50bfbe77aba15973f8d6938b66537055ebefc3ed170b285d6f1eadaa8e1b1",
-      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on this checkout against eth_getCode via the valve gateway."
+      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on the original development checkout against eth_getCode via the valve gateway. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "ProveBatchExecutorCallSink": {
       "address": "0x03B4417065F263e30f1c401a023D2E6d403F7004",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 1868,
       "onChainSha256": "1d4a86f4d992d55ac558e75575e863298d1795e2de7af35c3ce103b36bc34993",
-      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on this checkout against eth_getCode via the valve gateway."
+      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on the original development checkout against eth_getCode via the valve gateway. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     },
     "RfqVenue": {
       "address": "0x48ebDd0770934799288ab826C439aa029B482896",
-      "verdict": "identical",
+      "verdict": "same-program",
       "onChainSize": 5460,
       "onChainSha256": "90378888f9a31ff400afb2709409466bcf8c091a0620aef7cadfa3cdf27fc0b9",
-      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on this checkout against eth_getCode via the valve gateway."
+      "why": "Redeploy 2026-10-06 from master cfd6e85 (fee-config tree). Verified identical on the original development checkout against eth_getCode via the valve gateway. Re-pinned 2026-10-13 for the public repository: every instruction byte matches; only the solc metadata trailer differs, because solc hashes remappings and the absolute checkout path, which differ on this tree and on CI runners. contracts/src is unchanged."
     }
   }
 }
