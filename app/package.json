@@ -25,7 +25,7 @@
   "dependencies": {
     "@msgboard/sdk": "^0.4.0",
     "@prove.cash/sdk": "file:../sdk",
-    "@walletconnect/universal-provider": "^2.25.0",
+    "@walletconnect/universal-provider": "^2.26.0",
     "react": "^19.2.8",
     "react-dom": "^19.3.0",
     "uqr": "^0.1.3",
