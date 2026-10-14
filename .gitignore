@@ -53,6 +53,8 @@ lcov.info
 # cache directories and cannot clobber the artifacts a test run is using.
 contracts/out-coverage/
 contracts/cache-coverage/
+contracts/out-fork/
+contracts/cache-fork/
 
 # The running account of this work. Not part of the repo.
 progress.txt

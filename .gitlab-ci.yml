@@ -68,10 +68,11 @@ contracts:
   script:
     - cd contracts
     - forge fmt --check
+    - forge build --sizes
+    - forge lint
     - 'export FOUNDRY_ETH_RPC_HEADERS="[\"X-API-Key: ${PROVE_CI_RPC_KEY}\"]"'
     - FOUNDRY_PROFILE=fork python3 tools/count-429.py --upstream https://one.valve.city/rpc/evm/369 --max-pct 10 -- forge test --match-path 'test/Fork*.t.sol' -vv -j 1 --compute-units-per-second 165
     - unset FOUNDRY_ETH_RPC_HEADERS
-    - forge build --sizes
     - forge test -vv
     - python3 tools/coverage-gate.py
     - python3 tools/src-fingerprint.py

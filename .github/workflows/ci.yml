@@ -40,14 +40,23 @@ jobs:
       # Forge's own build cache. Forge re-checks every source by content hash, so a stale entry
       # only costs a rebuild; it can never hand back bytecode for a source that changed. The
       # bytecode pin and the coverage gate still read whatever this run compiles.
+      #
+      # One key per job. With a shared key the three jobs race to save it, the first to finish
+      # wins, and the contracts job (the one that compiles most) never saved. This job also caches
+      # the fork and coverage builds, which `[profile.fork]` and `coverage-gate.py` keep in their
+      # own directories so the three profiles stop invalidating one another.
       - uses: actions/cache@v4
         with:
           path: |
             contracts/out
             contracts/cache
-          key: forge-v1.8.0-${{ hashFiles('contracts/foundry.toml', '.gitmodules', 'contracts/src/**/*.sol', 'contracts/test/**/*.sol', 'contracts/script/**/*.sol') }}
+            contracts/out-fork
+            contracts/cache-fork
+            contracts/out-coverage
+            contracts/cache-coverage
+          key: forge-contracts-v1.8.0-${{ hashFiles('contracts/foundry.toml', '.gitmodules', 'contracts/src/**/*.sol', 'contracts/test/**/*.sol', 'contracts/script/**/*.sol') }}
           restore-keys: |
-            forge-v1.8.0-
+            forge-contracts-v1.8.0-
 
       # Formatting was unchecked until 2026-09-09 and 43 files had drifted. Nobody ran the
       # formatter because a run of it moves most lines in `contracts/`, which rots the line
@@ -55,6 +64,16 @@ jobs:
       # in beside the tool that repairs that: `contracts/tools/reanchor-citations.py`.
       - name: Formatting
         run: forge fmt --check
+        working-directory: contracts
+
+      - name: Build
+        run: forge build --sizes
+        working-directory: contracts
+
+      # Forge's linter, as its own step. `lint_on_build = false` in `foundry.toml` stops every
+      # build from repeating it. It reports and does not fail, as it did inside the build.
+      - name: Lint
+        run: forge lint
         working-directory: contracts
 
       # The fork suites, which had never run in CI: `secrets.PULSECHAIN_RPC` was expanded here
@@ -88,10 +107,6 @@ jobs:
         env:
           FOUNDRY_ETH_RPC_HEADERS: >-
             ${{ format('["X-API-Key: {0}"]', secrets.PROVE_CI_RPC_KEY || 'vk_demo') }}
-
-      - name: Build
-        run: forge build --sizes
-        working-directory: contracts
 
       # The fork tests skip themselves without PULSECHAIN_RPC, so this stays
       # offline unless the secret is set on the repository.
@@ -250,9 +265,9 @@ jobs:
           path: |
             contracts/out
             contracts/cache
-          key: forge-v1.8.0-${{ hashFiles('contracts/foundry.toml', '.gitmodules', 'contracts/src/**/*.sol', 'contracts/test/**/*.sol', 'contracts/script/**/*.sol') }}
+          key: forge-sdk-v1.8.0-${{ hashFiles('contracts/foundry.toml', '.gitmodules', 'contracts/src/**/*.sol', 'contracts/test/**/*.sol', 'contracts/script/**/*.sol') }}
           restore-keys: |
-            forge-v1.8.0-
+            forge-sdk-v1.8.0-
 
       # The ABI check reads what the compiler produced, so the contracts have to be built.
       - name: Build contracts
@@ -328,9 +343,9 @@ jobs:
           path: |
             contracts/out
             contracts/cache
-          key: forge-v1.8.0-${{ hashFiles('contracts/foundry.toml', '.gitmodules', 'contracts/src/**/*.sol', 'contracts/test/**/*.sol', 'contracts/script/**/*.sol') }}
+          key: forge-app-v1.8.0-${{ hashFiles('contracts/foundry.toml', '.gitmodules', 'contracts/src/**/*.sol', 'contracts/test/**/*.sol', 'contracts/script/**/*.sol') }}
           restore-keys: |
-            forge-v1.8.0-
+            forge-app-v1.8.0-
 
       - name: Build contracts
         run: forge build

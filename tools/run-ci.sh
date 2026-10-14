@@ -29,8 +29,9 @@ WANT="${1:-all}"
 # checker knows to skip them and fails if it meets a `uses:` it does not recognise.
 STEPS=(
   "contracts|contracts|forge fmt --check"
-  "contracts|contracts|FOUNDRY_PROFILE=fork python3 tools/count-429.py --upstream https://one.valve.city/rpc/evm/369 --max-pct 10 -- forge test --match-path 'test/Fork*.t.sol' -vv -j 1 --compute-units-per-second 165"
   "contracts|contracts|forge build --sizes"
+  "contracts|contracts|forge lint"
+  "contracts|contracts|FOUNDRY_PROFILE=fork python3 tools/count-429.py --upstream https://one.valve.city/rpc/evm/369 --max-pct 10 -- forge test --match-path 'test/Fork*.t.sol' -vv -j 1 --compute-units-per-second 165"
   "contracts|contracts|forge test -vv"
   "contracts|contracts|python3 tools/coverage-gate.py"
   "contracts|contracts|python3 tools/src-fingerprint.py"

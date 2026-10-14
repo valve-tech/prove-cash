@@ -80,12 +80,21 @@ call_override = false
 # measures it on both chains — so shanghai here describes the chain rather than widening anything.
 [profile.fork]
 evm_version = "shanghai"
+# Its own build directories. A shanghai build in `out/` invalidates the paris one, so CI's build
+# step compiled everything twice. Kept apart, each profile reuses its own cached build.
+out = "out-fork"
+cache_path = "cache-fork"
 # The valve gateway reads its key from an `X-API-Key` header and answers 401 without one. A key in
 # the URL path reaches access logs and every upstream hop, so the URL carries none. This is the
 # public demo key. `FOUNDRY_ETH_RPC_HEADERS='["X-API-Key: …"]'` replaces the list, and CI sets it
 # from `PROVE_CI_RPC_KEY`. An EMPTY `FOUNDRY_ETH_RPC_HEADERS` deletes the list (measured on 1.8.0),
 # so never export it blank. Forge sends this header to whatever `PULSECHAIN_RPC` names.
 eth_rpc_headers = ["X-API-Key: vk_demo"]
+
+# Forge lints on every build by default, which repeated ~1,750 findings in each build step. CI
+# runs `forge lint` as its own step instead; it reports and does not fail, as before.
+[lint]
+lint_on_build = false
 
 [fmt]
 line_length = 100
