@@ -45,7 +45,7 @@ jobs:
       # wins, and the contracts job (the one that compiles most) never saved. This job also caches
       # the fork and coverage builds, which `[profile.fork]` and `coverage-gate.py` keep in their
       # own directories so the three profiles stop invalidating one another.
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: |
             contracts/out
@@ -260,7 +260,7 @@ jobs:
       # Forge's own build cache. Forge re-checks every source by content hash, so a stale entry
       # only costs a rebuild; it can never hand back bytecode for a source that changed. The
       # bytecode pin and the coverage gate still read whatever this run compiles.
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: |
             contracts/out
@@ -338,7 +338,7 @@ jobs:
       # Forge's own build cache. Forge re-checks every source by content hash, so a stale entry
       # only costs a rebuild; it can never hand back bytecode for a source that changed. The
       # bytecode pin and the coverage gate still read whatever this run compiles.
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: |
             contracts/out
